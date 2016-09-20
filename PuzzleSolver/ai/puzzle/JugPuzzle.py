@@ -3,6 +3,7 @@ Created on 16-Sep-2016
  
 @author: khush
 '''
+import math
  
 class JugPuzzle(object):
     '''
@@ -17,12 +18,12 @@ class JugPuzzle(object):
         initialsize = eval(inputArray[2])
         goal = eval(inputArray[3])
          
-        self.JugNodesList = []        
+        self.nodesList = []        
         self.maxJug1 = maxsize[0]
         self.maxJug2 = maxsize[1]
         self.addJugNode(initialsize)
-        self.startNode = self.JugNodesList[0]
-        self.addJugNode(goal, True)
+        self.startNode = self.nodesList[0]
+        self.goalNode = self.addJugNode(goal, True)
         self.createChildNodes();
              
                               
@@ -30,11 +31,11 @@ class JugPuzzle(object):
         allchild = False
 #         ic = 0
         while(allchild != True):
-#             print len(self.JugNodesList)
+#             print len(self.nodesList)
 #             ic=ic+1 
 #             print ic
             allchild = True
-            for i in self.JugNodesList:
+            for i in self.nodesList:
                 if(not i.isgoal and len(i.childnodes) == 0):
                     allchild = False
                     i.setchildNodes(self.getChildNodes(i))
@@ -85,16 +86,24 @@ class JugPuzzle(object):
         nodeExists = False
         returnNode = None
          
-        for node in self.JugNodesList:
+        for node in self.nodesList:
             if node.jug[0] == nNodeTuple[0] and node.jug[1] == nNodeTuple[1]:
                 returnNode = node
                 nodeExists = True  
          
         if(nodeExists != True):
             returnNode = JugNode(nNodeTuple)
-            self.JugNodesList.append(returnNode)
+            self.nodesList.append(returnNode)
        
         return returnNode    
+
+    def getGreedyHeuristic(self):
+        greedyfn = dict()
+        dist=0.0
+        for nodev in self.nodesList:
+            dist = (math.pow(nodev.jug[0]-self.goalNode.jug[0],2)) + math.pow((nodev.jug[1]-self.goalNode.jug[1]),2)
+            greedyfn[nodev] = dist
+        return greedyfn
         
                
 class JugNode(object):
@@ -115,3 +124,4 @@ class JugNode(object):
              
     def isgoalState(self):
         return self.isgoal
+    #Calculate greedyHeuristic for Problem

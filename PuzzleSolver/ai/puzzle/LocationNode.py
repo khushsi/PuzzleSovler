@@ -12,3 +12,4 @@ class LocationNode(object):
             
     def isgoalState(self):
         return self.isgoal
+    

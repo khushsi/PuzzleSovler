@@ -4,6 +4,7 @@ Created on 16-Sep-2016
 @author: khush
 '''
 from ai.puzzle.LocationNode import LocationNode
+import math
 
 
 class PathPuzzle(object):
@@ -21,11 +22,11 @@ class PathPuzzle(object):
             self.addNode(i[0],(i[1],i[2]))
         
         self.startNode =  self.getNode(str(inputArray[2].replace('"', '')))
-        print self.startNode
-        goalnode = self.getNode(inputArray[3].replace('"', ''))
         
-        if(goalnode):
-            goalnode.isgoal= True
+        self.goalNode = self.getNode(inputArray[3].replace('"', ''))
+        
+        if(self.goalNode):
+            self.goalNode.isgoal= True
         self.createChildNodes(inputArray[4:]);
             
                              
@@ -55,3 +56,12 @@ class PathPuzzle(object):
                 return i
         return None
     
+    #Calculate greedyHeuristic for Problem
+    def getGreedyHeuristic(self):
+        greedyfn = dict()
+        dist=0.0
+        for nodev in self.nodesList:
+            dist = (math.pow(nodev.location[0]-self.goalNode.location[0],2)) + math.pow((nodev.location[1]-self.goalNode.location[1]),2)
+            greedyfn[nodev] = dist
+        return greedyfn
+        

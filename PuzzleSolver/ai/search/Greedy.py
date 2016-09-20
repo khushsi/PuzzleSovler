@@ -6,11 +6,11 @@ Created on 16-Sep-2016
 from Queue import Queue, PriorityQueue
 
 
-class Uniform:  # @IndentOk
+class Greedy:  # @IndentOk
     '''
-      Breath First Search  
+      Greedy Algorithm
     '''
-def search(startnode):
+def search(startnode,heuristicfn):
     try:
         visitedList=[]
         evaluatedPath=[]
@@ -28,23 +28,28 @@ def search(startnode):
         if(maxfrontiersize < frontierQueue.qsize()):
             maxfrontiersize = frontierQueue.qsize()
             
-        #print "FQ : PUT : "+ startnode.printNode()
+#         print "FQ : PUT : "+ startnode.printNode()
         while(frontierQueue.qsize() > 0):
             
             nodegen = frontierQueue.get();
+            
             #Empty Queue
+            while(not frontierQueue.empty()):
+                frontierQueue.get()
                 
             generatedNode = nodegen[1]
-            generatedNodeval = nodegen[0]
             totalnumberofnodesgenerated = totalnumberofnodesgenerated + 1            
-            #print "FQ : :GEt : "+ generatedNode.printNode()  
+#             print "FQ : :GEt : "+ generatedNode.printNode()  
             
             if generatedNode not in visitedList:                
-                evaluatedPath.append(generatedNode)
-                cost = cost + generatedNodeval                 
+                evaluatedPath.append(generatedNode)                
+
+                if(len(evaluatedPath) > 1):
+#                     print "Generated Node" + generatedNode.printNode()
+#                     print "Parent Node" + evaluatedPath[len(evaluatedPath)-2].printNode()
+                    cost = cost  + evaluatedPath[len(evaluatedPath)-2].childnodeswithcost[generatedNode]
+                                 
                 if generatedNode.isgoalState():
-#                     for i in evaluatedPath:
-#                         print i.printNode()    
                     return evaluatedPath,maxfrontiersize,maxvisitedlistsize,totalnumberofnodesgenerated,cost
             
                 visitedList.append(generatedNode)
@@ -56,15 +61,16 @@ def search(startnode):
 #                     print k.printNode()
 #                 print "Visited End"
 
-                for childnode in generatedNode.childnodes.keys():
+                for childnode in generatedNode.childnodes:
                     
                     if(childnode not in visitedList):                        
-                        frontierQueue.put((generatedNode.childnodes[childnode],childnode))
-                        #print "FQ : "+generatedNode.printNode()+" : PUT : "+ childnode.printNode() +" "+ str(generatedNode.childnodes[childnode])
+                        frontierQueue.put((heuristicfn[childnode],childnode))
+#                         print "FQ : "+generatedNode.printNode()+" : PUT : "+ childnode.printNode() +" "+ str(heuristicfn[childnode])
+                    
                     #Update Max Frontier Queue Size
                     if(maxfrontiersize < frontierQueue.qsize()):
                         maxfrontiersize = frontierQueue.qsize()
-                        #print "FQ : PUT : "+ childnode.printNode()
+#                         print "FQ : PUT : "+ childnode.printNode()
                     
     except Exception,e:
         print "There is an error in provided Input"

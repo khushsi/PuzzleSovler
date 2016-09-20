@@ -7,7 +7,7 @@ import sys
 
 from ai.puzzle.JugPuzzle import JugPuzzle
 from ai.puzzle.PathPuzzle import PathPuzzle
-from ai.search import BFS, IDDFS, Uniform,DFS
+from ai.search import BFS, IDDFS, Uniform,DFS,Greedy
 
 
 
@@ -49,6 +49,8 @@ if __name__ == '__main__':
                 cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,maxdepth = IDDFS.search(cPuzzle.startNode)
             elif (searchalgo == "Uniform"):
                 cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,cost = Uniform.search(cPuzzle.startNode)
+            elif (searchalgo == "Greedy"):
+                cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,cost = Greedy.search(cPuzzle.startNode,cPuzzle.getGreedyHeuristic())
                 
             if(len(cSearch) == 0):
                 print "No Solution"    
