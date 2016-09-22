@@ -97,7 +97,7 @@ class JugPuzzle(object):
        
         return returnNode    
 
-    def getGreedyHeuristic(self):
+    def getEuclideanHeuristic(self):
         greedyfn = dict()
         dist=0.0
         for nodev in self.nodesList:

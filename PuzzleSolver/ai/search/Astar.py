@@ -7,9 +7,9 @@ from Queue import  PriorityQueue
 import copy
 
 
-class Greedy:  # @IndentOk
+class Astar:  # @IndentOk
     '''
-      Breath First Search  
+      DFS  
     '''
 def search(startnode,heuristicfn):
     try:
@@ -25,7 +25,6 @@ def search(startnode,heuristicfn):
             return [],maxfrontiersize,maxvisitedlistsize,totalnumberofnodesgenerated,cost
         
         #frontierQueue.put(startnode)
-#         print heuristicfn[startnode]
         frontierQueue.put((heuristicfn[startnode],[startnode]))
         #Update Max Frontier Queue Size
         if(maxfrontiersize < frontierQueue.qsize()):
@@ -36,35 +35,42 @@ def search(startnode,heuristicfn):
             nodegen=[]
             nodegen = copy.copy(frontierQueue.get());
             #Empty Queue
-            parentNode = None    
+                
             generatedNode = nodegen[1][len(nodegen[1])-1]
-             
+            parentNode = None    
+            if(len(nodegen[1]) > 1):
+                parentNode= nodegen[1][len(nodegen[1])-2]
+            
             totalnumberofnodesgenerated = totalnumberofnodesgenerated + 1
             
             if generatedNode.isgoalState():
                     newlist = copy.copy(nodegen[1])
-                    exploredQueue.put((nodegen[0],newlist))                    
+                    exploredQueue.put((nodegen[0],newlist))
+                    
             else:
-                if generatedNode not in visitedList:                
 
-                    visitedList.append(generatedNode)
-                    if(maxvisitedlistsize < len(visitedList)):
-                        maxvisitedlistsize = len(visitedList)
-                        
-                    #print generatedNode.childnodeswithcost.size()    
-                    for childnode in generatedNode.childnodes:
+                if(maxvisitedlistsize < len(visitedList)):
+                    maxvisitedlistsize = len(visitedList)
 
-                        if(childnode not in visitedList):
-                            cost = heuristicfn[childnode] + nodegen[0]                         
-                            frontierQueue.put((cost,nodegen[1] + [childnode]))
-                            
-                        #Update Max Frontier Queue Size
-                        if(maxfrontiersize < frontierQueue.qsize()):
-                            maxfrontiersize = frontierQueue.qsize()
-                            #print "FQ : PUT : "+ childnode.printNode()
+                currentdistance = 0
+                previousheuristic=heuristicfn[generatedNode]
+                
+                
+                #print generatedNode.childnodeswithcost.size()    
+                for childnode in generatedNode.childnodes:
+                    if childnode is not parentNode:
+                        currentdistance = generatedNode.childnodeswithcost[childnode]
+                        cost = heuristicfn[childnode] + nodegen[0] + currentdistance - previousheuristic
+                        frontierQueue.put((cost,nodegen[1] + [childnode]))
+                    
+                #Update Max Frontier Queue Size
+                if(maxfrontiersize < frontierQueue.qsize()):
+                    maxfrontiersize = frontierQueue.qsize()
+                    #print "FQ : PUT : "+ childnode.printNode()
 
         final = exploredQueue.get()
         cost = final[0]
+        
         return final[1],maxfrontiersize,maxvisitedlistsize,totalnumberofnodesgenerated,cost                  
     finally:
         abc=10

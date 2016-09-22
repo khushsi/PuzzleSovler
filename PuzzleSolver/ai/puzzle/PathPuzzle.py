@@ -57,11 +57,21 @@ class PathPuzzle(object):
         return None
     
     #Calculate greedyHeuristic for Problem
-    def getGreedyHeuristic(self):
+    def getEuclideanHeuristic(self):
         greedyfn = dict()
         dist=0.0
         for nodev in self.nodesList:
-            dist = (math.pow(nodev.location[0]-self.goalNode.location[0],2)) + math.pow((nodev.location[1]-self.goalNode.location[1]),2)
+            dist = math.sqrt(((math.pow(nodev.location[0]-self.goalNode.location[0],2)) + math.pow((nodev.location[1]-self.goalNode.location[1]),2)))
             greedyfn[nodev] = dist
         return greedyfn
         
+    def getManhattanHeuristic(self):
+        greedyfn = dict()
+        dist=0.0
+        for nodev in self.nodesList:
+            dist = abs(nodev.location[0]-self.goalNode.location[0]) + abs(nodev.location[1]-self.goalNode.location[1])
+            greedyfn[nodev] = dist
+        return greedyfn
+        
+    
+    
