@@ -63,10 +63,10 @@ def search(startnode,heuristicfn):
                         cost = heuristicfn[childnode] + nodegen[0] + currentdistance - previousheuristic
                         frontierQueue.put((cost,nodegen[1] + [childnode]))
                     
-                #Update Max Frontier Queue Size
-                if(maxfrontiersize < frontierQueue.qsize()):
-                    maxfrontiersize = frontierQueue.qsize()
-                    #print "FQ : PUT : "+ childnode.printNode()
+                    #Update Max Frontier Queue Size
+                    if(maxfrontiersize < frontierQueue.qsize()):
+                        maxfrontiersize = frontierQueue.qsize()
+                        #print "FQ : PUT : "+ childnode.printNode()
 
         final = exploredQueue.get()
         cost = final[0]
