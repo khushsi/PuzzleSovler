@@ -42,7 +42,10 @@ class PathPuzzle(object):
             
             node1.childnodeswithcost[node2]=distance
             node2.childnodeswithcost[node1]=distance
-                
+    
+    def getChildNodes(self,cNode):        
+        return cNode.childnodes
+    
     def addNode(self,LocationName, location, isgoal=False):        
         
         returnNode = LocationNode(LocationName, location, isgoal=False)

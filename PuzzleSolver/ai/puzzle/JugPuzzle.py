@@ -38,7 +38,6 @@ class JugPuzzle(object):
             for i in self.nodesList:
                 if(not i.isgoal and len(i.childnodes) == 0):
                     allchild = False
-                    i.setchildNodes(self.getChildNodes(i))
                  
              
     def getChildNodes(self, cJugNode):
@@ -73,8 +72,8 @@ class JugPuzzle(object):
             nc2 = cJugNode.jug[1] - (nc1 - cJugNode.jug[0]);    
             childnodes.append(self.getNode((nc1, nc2)))
  
-             
-        return childnodes
+            cJugNode.childnodes=childnodes
+        return cJugNode.childnodes
       
     def addJugNode(self, nNodeTuple, isgoal=False):
         aNode = self.getNode(nNodeTuple)
@@ -104,6 +103,14 @@ class JugPuzzle(object):
             dist = (math.pow(nodev.jug[0]-self.goalNode.jug[0],2)) + math.pow((nodev.jug[1]-self.goalNode.jug[1]),2)
             greedyfn[nodev] = dist
         return greedyfn
+
+    def getManhattanHeuristic(self):
+        greedyfn = dict()
+        dist=0.0
+        for nodev in self.nodesList:
+            dist = (abs(nodev.jug[0]-self.goalNode.jug[0])) + abs((nodev.jug[1]-self.goalNode.jug[1]))
+            greedyfn[nodev] = dist
+        return greedyfn
         
                
 class JugNode(object):
@@ -125,3 +132,6 @@ class JugNode(object):
     def isgoalState(self):
         return self.isgoal
     #Calculate greedyHeuristic for Problem
+
+    def getChildNodes(self):
+        return   self.childnodes

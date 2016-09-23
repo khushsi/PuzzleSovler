@@ -7,6 +7,7 @@ import sys
 
 from ai.puzzle.JugPuzzle import JugPuzzle
 from ai.puzzle.PathPuzzle import PathPuzzle
+from ai.puzzle.PancakePuzzle import PancakePuzzle
 from ai.search import BFS, IDDFS, Uniform, DFS, Greedy, Astar, IDAstar
 from ai.search import AstarV
 
@@ -14,6 +15,7 @@ from ai.search import AstarV
 if __name__ == '__main__':
     
     try:
+        
         
         inputArray=[]
         maxstoredquesize = 0
@@ -34,13 +36,15 @@ if __name__ == '__main__':
                     
             puzzle=inputArray[0].replace('\n', '').replace('\r', '')
             searchalgo=sys.argv[2]
-            if(len(sys.argv) >3):
+            if(len(sys.argv) >= 3):
                 heuristic=sys.argv[3]
             
             if(str(puzzle) == "jugs"):
                 cPuzzle = JugPuzzle(inputArray)
             elif(str(puzzle) == "cities" ):
                 cPuzzle = PathPuzzle(inputArray)
+            elif(str(puzzle) == "pancakes"):
+                cPuzzle = PancakePuzzle(inputArray)
                 
             heuristiclist=dict()
             
@@ -51,19 +55,19 @@ if __name__ == '__main__':
             
                 
             if(searchalgo.lower() == "bfs"):
-                cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated = BFS.search(cPuzzle.startNode)
+                cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated = BFS.search(cPuzzle)
             elif (searchalgo.lower() == "dfs"):
-                cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated = DFS.search(cPuzzle.startNode)
+                cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated = DFS.search(cPuzzle)
             elif (searchalgo.lower() == "iddfs"):
-                cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,maxdepth = IDDFS.search(cPuzzle.startNode)
+                cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,maxdepth = IDDFS.search(cPuzzle)
             elif (searchalgo.lower() == "uniform"):
-                cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,cost = Uniform.search(cPuzzle.startNode)
+                cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,cost = Uniform.search(cPuzzle)
             elif (searchalgo.lower() == "greedy"):
-                cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,cost = Greedy.search(cPuzzle.startNode,heuristiclist)
+                cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,cost = Greedy.search(cPuzzle,heuristiclist)
             elif (searchalgo.lower() == "astar"):
-                cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,cost =  Astar.search(cPuzzle.startNode,heuristiclist)
+                cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,cost =  AstarV.search(cPuzzle,heuristiclist)
             elif (searchalgo.lower() == "idastar"):
-                cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,cost,cutoff =  IDAstar.search(cPuzzle.startNode,heuristiclist)
+                cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,cost,cutoff =  IDAstar.search(cPuzzle,heuristiclist)
 
                 
             if(len(cSearch) == 0):
@@ -75,9 +79,9 @@ if __name__ == '__main__':
             print "Space Complexity Queue:" + str(maxstoredquesize)
             print "Space Complexity VisitedList:" + str(maxvisitedlistsize)
             print "PathCost:" + str(cost)
-            if (searchalgo.lower() == "iddfs"):
-                print " Depth Iterated : " + maxdepth
-            elif(searchalgo.lower() == "idastar"):
+            if (searchalgo == "iddfs"):
+                print "Depth Iterated : " + str(maxdepth)
+            elif(searchalgo == "idastar"):
                 print "Cut-off Reached : " + str(cutoff)    
                 
     finally:

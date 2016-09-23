@@ -8,13 +8,13 @@ class DFS:  # @IndentOk
     '''
       Breath First Search  
     '''
-def search(startnode):
+def search(cPuzzle):
     try:
 
         maxfrontiersize=0
         maxvisitedlistsize=0
         totalnumberofnodesgenerated=0
-        
+        startnode = cPuzzle.startNode
         nodestack=LifoQueue();
         if startnode is None:
             return [],maxfrontiersize,maxvisitedlistsize,totalnumberofnodesgenerated
@@ -53,7 +53,7 @@ def search(startnode):
     #                 print k.printNode()
     #             print "Visited End"
                 
-                for childnode in generatedNode.childnodes:
+                for childnode in cPuzzle.getChildNodes(generatedNode):
                     if(childnode not in visitedList):
                         nodestack.put(childnode)
                     if(maxfrontiersize < nodestack.qsize()):

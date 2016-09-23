@@ -3,7 +3,8 @@ Created on 16-Sep-2016
 
 @author: khush
 '''
-from Queue import  PriorityQueue
+#from ai.utility.PriorityQueueE import  PriorityQueueE
+from Queue import PriorityQueue
 import copy
 
 
@@ -12,14 +13,14 @@ class IDAstar:  # @IndentOk
       DFS  
     '''
 
-def search(startnode,heuristicfn):
+def search(cPuzzle,heuristicfn):
     
     cutoff = 0
     maxfrontiersize=0
     maxvisitedlistsize=0
     totalnumberofnodesgenerated=0
     cost =0
-    
+    startnode = cPuzzle.startNode
     
     try:
         cutoff = heuristicfn[startnode]
@@ -27,7 +28,7 @@ def search(startnode,heuristicfn):
         while(ncutoff  >= cutoff):
             cutoff = ncutoff
 #             print "outgoing DFS Count " + str(cutoff)
-            evalp,maxfrontiersizer,maxvisitedlistsizer,totalnumberofnodesgeneratedr,cost,ncutoff = IDAstar(startnode,heuristicfn,cutoff)
+            evalp,maxfrontiersizer,maxvisitedlistsizer,totalnumberofnodesgeneratedr,cost,ncutoff = IDAstar(startnode,heuristicfn,cutoff,cPuzzle)
             if(maxfrontiersize < maxfrontiersizer):
                 maxfrontiersize = maxfrontiersizer
             if(maxvisitedlistsize < maxvisitedlistsizer):
@@ -44,7 +45,7 @@ def search(startnode,heuristicfn):
         print str(e)
     return [],maxfrontiersize,maxvisitedlistsize,totalnumberofnodesgenerated,cost,cutoff
 
-def IDAstar(startnode,heuristicfn,cutoff):
+def IDAstar(startnode,heuristicfn,cutoff,cPuzzle):
     try:
         visitedList=[]
         nextcutoff=cutoff
@@ -94,7 +95,7 @@ def IDAstar(startnode,heuristicfn,cutoff):
     
                     currentdistance = 0
                     #print generatedNode.childnodeswithcost.size()    
-                    for childnode in generatedNode.childnodes:
+                    for childnode in cPuzzle.getChildNodes(generatedNode):
                         currentdistance = generatedNode.childnodeswithcost[childnode]
                         cost = heuristicfn[childnode] + nodegen[0] + currentdistance - generatednodeheuristic
 #                         print generatedNode.printNode()

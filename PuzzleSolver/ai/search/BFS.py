@@ -8,11 +8,11 @@ class BFS:  # @IndentOk
     '''
       Breath First Search  
     '''
-def search(startnode):
+def search(cPuzzle):
     try:
         visitedList=[]
         evaluatedPath=[]
-        
+        startnode = cPuzzle.startNode
         frontierQueue=Queue();
         maxfrontiersize=0
         maxvisitedlistsize=0
@@ -21,17 +21,22 @@ def search(startnode):
             return [],maxfrontiersize,maxvisitedlistsize,totalnumberofnodesgenerated
         
         frontierQueue.put(startnode)
+
         #Update Max Frontier Queue Size
         if(maxfrontiersize < frontierQueue.qsize()):
             maxfrontiersize = frontierQueue.qsize()
             
-        #print "FQ : PUT : "+ startnode.printNode()
+#       print "FQ : PUT : "+ startnode.printNode()
         while(frontierQueue.qsize() > 0):
             generatedNode = frontierQueue.get();
+                         
+            
             totalnumberofnodesgenerated = totalnumberofnodesgenerated + 1            
-            #print "FQ : GEt : "+ generatedNode.printNode()
+#             print "FQ : GEt : "+ generatedNode.printNode()
             if generatedNode not in visitedList:                
-                evaluatedPath.append(generatedNode)                
+                
+                evaluatedPath.append(generatedNode)
+#                 print generatedNode.printNode()                
                 if generatedNode.isgoalState():
 #                     for i in evaluatedPath:
 #                         print i.printNode()    
@@ -46,13 +51,13 @@ def search(startnode):
 #                     print k.printNode()
 #                 print "Visited End"
 
-                for childnode in generatedNode.childnodes:
+                for childnode in cPuzzle.getChildNodes(generatedNode):
                     if(childnode not in visitedList):
                         frontierQueue.put(childnode)
                     #Update Max Frontier Queue Size
                     if(maxfrontiersize < frontierQueue.qsize()):
                         maxfrontiersize = frontierQueue.qsize()
-                        #print "FQ : PUT : "+ childnode.printNode()
+#                         print "FQ : PUT : "+ childnode.printNode()
                     
     except Exception,e:
         print "There is an error in provided Input"

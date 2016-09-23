@@ -8,7 +8,7 @@ class IDDFS:  # @IndentOk
     '''
       Iterative Deepening DFS  
     '''
-def search(startnode):
+def search(cPuzzle):
     
     depth = 0
     dfscount=0
@@ -16,6 +16,7 @@ def search(startnode):
     maxvisitedlistsize=0
     totalnumberofnodesgenerated=0
     maxdepth=0
+    startnode = cPuzzle.startNode
     
     try:
         
@@ -23,7 +24,7 @@ def search(startnode):
             dfscount = dfscount + 1
             depth = 0
 #             print "outgoing DFS Count " + str(dfscount)
-            evalp,maxfrontiersizer,maxvisitedlistsizer,totalnumberofnodesgeneratedr,maxdepth = inBFS(startnode,depth,dfscount)
+            evalp,maxfrontiersizer,maxvisitedlistsizer,totalnumberofnodesgeneratedr,maxdepth = inBFS(startnode,depth,dfscount,cPuzzle)
             if(maxfrontiersize < maxfrontiersizer):
                 maxfrontiersize = maxfrontiersizer
             if(maxvisitedlistsize < maxvisitedlistsizer):
@@ -41,7 +42,7 @@ def search(startnode):
     return [],maxfrontiersize,maxvisitedlistsize,totalnumberofnodesgenerated,maxdepth
                 
                 
-def inBFS(startnode,depth,dfscount):
+def inBFS(startnode,depth,dfscount,cPuzzle):
     try:
         visitedList=[]
         evaluatedPath=[]
@@ -89,7 +90,7 @@ def inBFS(startnode,depth,dfscount):
                 if(maxvisitedlistsize < len(visitedList)):
                     maxvisitedlistsize = len(visitedList)
                                  
-                for childnode in generatedNode.childnodes:
+                for childnode in cPuzzle.getChildNodes(generatedNode):
                     if(childnode not in visitedList):
                         frontierQueue.put(childnode)
                         depthqueue.put(depth+1)
