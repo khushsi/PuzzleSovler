@@ -21,9 +21,9 @@ class PathPuzzle(object):
         for i in inputnodelist:
             self.addNode(i[0],(i[1],i[2]))
         
-        self.startNode =  self.getNode(str(inputArray[2].replace('"', '')))
+        self.startNode =  self.getNode(str(inputArray[2].replace('"', '').replace("'","")))
         
-        self.goalNode = self.getNode(inputArray[3].replace('"', ''))
+        self.goalNode = self.getNode(inputArray[3].replace('"', '').replace("'",""))
         
         if(self.goalNode):
             self.goalNode.isgoal= True
@@ -64,6 +64,7 @@ class PathPuzzle(object):
         greedyfn = dict()
         dist=0.0
         for nodev in self.nodesList:
+#             print nodev.printNode()
             dist = math.sqrt(((math.pow(nodev.location[0]-self.goalNode.location[0],2)) + math.pow((nodev.location[1]-self.goalNode.location[1]),2)))
             greedyfn[nodev] = dist
         return greedyfn

@@ -4,6 +4,7 @@ Created on 16-Sep-2016
 @author: khush
 '''
 from Queue import  PriorityQueue
+from ai.utility.PriorityQueueE import PriorityQueueE
 import copy
 
 
@@ -13,16 +14,16 @@ class Uniform:  # @IndentOk
     '''
 def search(startnode):
     try:
-        visitedList=[]
+#         visitedList=[]
 
         maxfrontiersize=0
-        maxvisitedlistsize=0
+#         maxvisitedlistsize=0
         totalnumberofnodesgenerated=0
         cost=0
-        frontierQueue=PriorityQueue()
+        frontierQueue=PriorityQueueE()
         exploredQueue=PriorityQueue()
         if startnode is  None:
-            return [],maxfrontiersize,maxvisitedlistsize,totalnumberofnodesgenerated,cost
+            return [],maxfrontiersize,0,totalnumberofnodesgenerated,cost
         
         #frontierQueue.put(startnode)
         frontierQueue.put((0,[startnode]))
@@ -45,28 +46,27 @@ def search(startnode):
                     exploredQueue.put((nodegen[0],newlist))
                     
             else:
-                if generatedNode not in visitedList:                
-
-                    visitedList.append(generatedNode)
-                    if(maxvisitedlistsize < len(visitedList)):
-                        maxvisitedlistsize = len(visitedList)
+                
+#                 visitedList.append(generatedNode)
+#                 if(maxvisitedlistsize < len(visitedList)):
+#                     maxvisitedlistsize = len(visitedList)
+                
+                #print generatedNode.childnodeswithcost.size()    
+                for childnode in generatedNode.childnodeswithcost.keys():
                     
-                    #print generatedNode.childnodeswithcost.size()    
-                    for childnode in generatedNode.childnodeswithcost.keys():
+                    if(childnode not in nodegen[1]):
+                        cost = generatedNode.childnodeswithcost[childnode] + nodegen[0]                        
+                        frontierQueue.put((cost,nodegen[1] + [childnode]))
                         
-                        if(childnode not in visitedList):
-                            cost = generatedNode.childnodeswithcost[childnode] + nodegen[0]                        
-                            frontierQueue.put((cost,nodegen[1] + [childnode]))
-                            
-                        #Update Max Frontier Queue Size
-                        if(maxfrontiersize < frontierQueue.qsize()):
-                            maxfrontiersize = frontierQueue.qsize()
-                            #print "FQ : PUT : "+ childnode.printNode()
+                    #Update Max Frontier Queue Size
+                    if(maxfrontiersize < frontierQueue.qsize()):
+                        maxfrontiersize = frontierQueue.qsize()
+                        #print "FQ : PUT : "+ childnode.printNode()
 
         final = exploredQueue.get()
         cost = final[0]
-        return final[1],maxfrontiersize,maxvisitedlistsize,totalnumberofnodesgenerated,cost                  
+        return final[1],maxfrontiersize,0,totalnumberofnodesgenerated,cost                  
     finally:
         abc=10
         
-    return [],maxfrontiersize,maxvisitedlistsize,totalnumberofnodesgenerated,cost      
+    return [],maxfrontiersize,0,totalnumberofnodesgenerated,cost      

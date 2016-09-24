@@ -21,77 +21,67 @@ class JugPuzzle(object):
         self.nodesList = []        
         self.maxJug1 = maxsize[0]
         self.maxJug2 = maxsize[1]
-        self.addJugNode(initialsize)
+        self.getNode(initialsize)
         self.startNode = self.nodesList[0]
-        self.goalNode = self.addJugNode(goal, True)
-        self.createChildNodes();
-             
-                              
-    def createChildNodes(self):
-        allchild = False
-#         ic = 0
-        while(allchild != True):
-#             print len(self.nodesList)
-#             ic=ic+1 
-#             print ic
-            allchild = True
-            for i in self.nodesList:
-                if(not i.isgoal and len(i.childnodes) == 0):
-                    allchild = False
+        self.goalNode = self.getNode(goal, True)
                  
              
-    def getChildNodes(self, cJugNode):
-         
+    def getChildNodes(self, cNode):
+
         childnodes = []
          
-        ''' Fill Jug to Max '''
-        if(cJugNode.jug[0] < self.maxJug1):
-            childnodes.append(self.getNode((self.maxJug1, cJugNode.jug[1])))
-        if(cJugNode.jug[1] < self.maxJug2):
-            childnodes.append(self.getNode((cJugNode.jug[0], self.maxJug2)))
-        ''' Empty one Jug '''
-        if(cJugNode.jug[0] > 0):
-            childnodes.append(self.getNode((0, cJugNode.jug[1])))
-        if(cJugNode.jug[1] > 0):
-            childnodes.append(self.getNode((cJugNode.jug[0], 0)))
-         
-        '''Transfer from 1 jug to Other'''    
-        if(cJugNode.jug[1] < self.maxJug2 and cJugNode.jug[0] > 0):
-            if(cJugNode.jug[0] + cJugNode.jug[1] >= self.maxJug2):
-                nc2 = self.maxJug2
-            else:
-                nc2 = cJugNode.jug[0] + cJugNode.jug[1]
-            nc1 = cJugNode.jug[0] - (nc2 - cJugNode.jug[1]);    
-            childnodes.append(self.getNode((nc1, nc2)))
- 
-        if(cJugNode.jug[0] < self.maxJug1 and cJugNode.jug[1] > 0):
-            if(cJugNode.jug[0] + cJugNode.jug[1] >= self.maxJug1):
-                nc1 = self.maxJug1
-            else:
-                nc1 = cJugNode.jug[0] + cJugNode.jug[1]
-            nc2 = cJugNode.jug[1] - (nc1 - cJugNode.jug[0]);    
-            childnodes.append(self.getNode((nc1, nc2)))
- 
-            cJugNode.childnodes=childnodes
-        return cJugNode.childnodes
-      
-    def addJugNode(self, nNodeTuple, isgoal=False):
-        aNode = self.getNode(nNodeTuple)
-        if isgoal:
-            aNode.isgoal = True
-        return aNode    
+        if(len(cNode.childnodes) == 0):              
+            ''' Fill Jug to Max '''
+            if(cNode.jug[0] < self.maxJug1):
+                childnodes.append(self.getNode((self.maxJug1, cNode.jug[1])))
+            if(cNode.jug[1] < self.maxJug2):
+                childnodes.append(self.getNode((cNode.jug[0], self.maxJug2)))
+            ''' Empty one Jug '''
+            if(cNode.jug[0] > 0):
+                childnodes.append(self.getNode((0, cNode.jug[1])))
+            if(cNode.jug[1] > 0):
+                childnodes.append(self.getNode((cNode.jug[0], 0)))
              
-    def getNode(self, nNodeTuple):        
+            '''Transfer from 1 jug to Other'''    
+            if(cNode.jug[1] < self.maxJug2 and cNode.jug[0] > 0):
+                if(cNode.jug[0] + cNode.jug[1] >= self.maxJug2):
+                    nc2 = self.maxJug2
+                else:
+                    nc2 = cNode.jug[0] + cNode.jug[1]
+                nc1 = cNode.jug[0] - (nc2 - cNode.jug[1]);    
+                childnodes.append(self.getNode((nc1, nc2)))
+     
+            if(cNode.jug[0] < self.maxJug1 and cNode.jug[1] > 0):
+                if(cNode.jug[0] + cNode.jug[1] >= self.maxJug1):
+                    nc1 = self.maxJug1
+                else:
+                    nc1 = cNode.jug[0] + cNode.jug[1]
+                nc2 = cNode.jug[1] - (nc1 - cNode.jug[0]);    
+                childnodes.append(self.getNode((nc1, nc2)))
+ 
+            cNode.childnodes=childnodes
+        return cNode.childnodes
+      
+    def getCost(self):
+        return 1;
+          
+#     def addNode(self, nNodeTuple, isgoal=False):
+#         aNode = self.getNode(nNodeTuple)
+#         if isgoal:
+#             aNode.isgoal = True
+#         return aNode    
+             
+    def getNode(self, nNodeTuple,isgoal=False):        
         nodeExists = False
         returnNode = None
          
         for node in self.nodesList:
-            if node.jug[0] == nNodeTuple[0] and node.jug[1] == nNodeTuple[1]:
+            if node.jug == nNodeTuple:
                 returnNode = node
                 nodeExists = True  
          
         if(nodeExists != True):
-            returnNode = JugNode(nNodeTuple)
+            returnNode = Node(nNodeTuple,isgoal)
             self.nodesList.append(returnNode)
        
         return returnNode    
@@ -113,7 +103,7 @@ class JugPuzzle(object):
         return greedyfn
         
                
-class JugNode(object):
+class Node(object):
      
     def __init__(self, jugvalues=(0, 0), isgoal=False):
         self.jug = jugvalues  
@@ -135,3 +125,6 @@ class JugNode(object):
 
     def getChildNodes(self):
         return   self.childnodes
+    
+    def getCost(self):
+        return 1

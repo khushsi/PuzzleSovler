@@ -4,6 +4,7 @@ Created on 16-Sep-2016
 @author: khush
 '''
 from Queue import  PriorityQueue
+from ai.utility.PriorityQueueE import PriorityQueueE
 import copy
 
 
@@ -13,16 +14,16 @@ class Astar:  # @IndentOk
     '''
 def search(cPuzzle,heuristicfn):
     try:
-        visitedList=[]
+#         visitedList=[]
         startnode=cPuzzle.startNode
         maxfrontiersize=0
-        maxvisitedlistsize=0
+#         maxvisitedlistsize=0
         totalnumberofnodesgenerated=0
         cost=0
-        frontierQueue=PriorityQueue()
+        frontierQueue=PriorityQueueE()
         exploredQueue=PriorityQueue()
         if startnode is  None:
-            return [],maxfrontiersize,maxvisitedlistsize,totalnumberofnodesgenerated,cost
+            return [],maxfrontiersize,0,totalnumberofnodesgenerated,cost
         
         #frontierQueue.put(startnode)
         frontierQueue.put((heuristicfn[startnode],[startnode]))
@@ -37,7 +38,7 @@ def search(cPuzzle,heuristicfn):
             #Empty Queue
                 
             generatedNode = nodegen[1][len(nodegen[1])-1]
-            visitedList.append(generatedNode)
+#             visitedList.append(generatedNode)
             parentNode = None    
             if(len(nodegen[1]) > 1):
                 parentNode= nodegen[1][len(nodegen[1])-2]
@@ -50,15 +51,13 @@ def search(cPuzzle,heuristicfn):
                     
             else:
 
-                if(maxvisitedlistsize < len(visitedList)):
-                    maxvisitedlistsize = len(visitedList)
 
                 currentdistance = 0
                 previousheuristic=heuristicfn[generatedNode]
                 
-                print len(nodegen[1])
+#                 print len(nodegen[1])
 #                 print len(generatedNode.childnodeswithcost)    
-                for childnode in generatedNode.childnodes:
+                for childnode in cPuzzle.getChildNodes(generatedNode):
                     if childnode  not in nodegen[1]:
                         currentdistance = generatedNode.childnodeswithcost[childnode]
                         cost = heuristicfn[childnode] + nodegen[0] + currentdistance - previousheuristic
@@ -72,8 +71,8 @@ def search(cPuzzle,heuristicfn):
         final = exploredQueue.get()
         cost = final[0]
         
-        return final[1],maxfrontiersize,maxvisitedlistsize,totalnumberofnodesgenerated,cost                  
+        return final[1],maxfrontiersize,0,totalnumberofnodesgenerated,cost                  
     finally:
         abc=10
         
-    return [],maxfrontiersize,maxvisitedlistsize,totalnumberofnodesgenerated,cost      
+    return [],maxfrontiersize,0,totalnumberofnodesgenerated,cost      

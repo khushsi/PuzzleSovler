@@ -21,28 +21,27 @@ def search(cPuzzle,heuristicfn):
     totalnumberofnodesgenerated=0
     cost =0
     startnode = cPuzzle.startNode
-    
-    try:
-        cutoff = heuristicfn[startnode]
-        ncutoff = heuristicfn[startnode]
-        while(ncutoff  >= cutoff):
-            cutoff = ncutoff
+#     try:
+    cutoff = heuristicfn[startnode]
+    ncutoff = heuristicfn[startnode]
+    while(ncutoff  >= cutoff):
+        cutoff = ncutoff
 #             print "outgoing DFS Count " + str(cutoff)
-            evalp,maxfrontiersizer,maxvisitedlistsizer,totalnumberofnodesgeneratedr,cost,ncutoff = IDAstar(startnode,heuristicfn,cutoff,cPuzzle)
-            if(maxfrontiersize < maxfrontiersizer):
-                maxfrontiersize = maxfrontiersizer
-            if(maxvisitedlistsize < maxvisitedlistsizer):
-                maxvisitedlistsize = maxvisitedlistsizer
-            totalnumberofnodesgenerated = totalnumberofnodesgenerated + totalnumberofnodesgeneratedr        
-    #             print "Incoming BFS Count " + str(depth)
-    #             print "Max Depth " + str(maxdepth)
-            if len(evalp) > 0:
-    #                 print len(evalp)
-                return evalp,maxfrontiersize,maxvisitedlistsize,totalnumberofnodesgenerated,cost,cutoff
-        
-    except Exception ,e:
-        print "There is an error in provided Input"
-        print str(e)
+        evalp,maxfrontiersizer,maxvisitedlistsizer,totalnumberofnodesgeneratedr,cost,ncutoff = IDAstar(startnode,heuristicfn,cutoff,cPuzzle)
+        if(maxfrontiersize < maxfrontiersizer):
+            maxfrontiersize = maxfrontiersizer
+        if(maxvisitedlistsize < maxvisitedlistsizer):
+            maxvisitedlistsize = maxvisitedlistsizer
+        totalnumberofnodesgenerated = totalnumberofnodesgenerated + totalnumberofnodesgeneratedr        
+#             print "Incoming BFS Count " + str(depth)
+#             print "Max Depth " + str(maxdepth)
+        if len(evalp) > 0:
+#                 print len(evalp)
+            return evalp,maxfrontiersize,maxvisitedlistsize,totalnumberofnodesgenerated,cost,cutoff
+    
+#     except Exception ,e:
+#         print "There is an error in provided Input"
+#         print str(e)
     return [],maxfrontiersize,maxvisitedlistsize,totalnumberofnodesgenerated,cost,cutoff
 
 def IDAstar(startnode,heuristicfn,cutoff,cPuzzle):

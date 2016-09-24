@@ -30,41 +30,31 @@ class PancakePuzzle(object):
         self.goalNode = self.addNode(goal, True)
         for i in self.nodesList:
             self.getChildNodes(i)       
-#         self.getChildNodes(self.startNode)
-                         
-
-    def createChildNodes(self):
-        allchild = False
-        while(allchild != True):
-            allchild = True
-            for i in self.nodesList:
-                if(not i.isgoal and len(i.childnodes) == 0):
-                    allchild = False
-                    i.setchildNodes(self.getChildNodes(i))
-                 
              
     def getChildNodes(self, cNode):
         childnodes=[]
         if(len(cNode.childnodes) == 0):
             newnode=[]  
-            queu = LifoQueue()    
-            for i in range(self.numberofpancakes):            
+            count = 0
+            prevnode = copy.copy(cNode.jug)
+            for i in range(self.numberofpancakes):           
                 newnode = []
-                for j in range(i+1):                
-                    queu.put((-1)*cNode.jug[j])                
-                while(not queu.empty()):
-                    newnode.append(queu.get())
-                newnode = newnode + cNode.jug[i+1:]
+                if(count == 0):
+                    newnode = [(-1)*prevnode[count]]  +prevnode[count+1:]
+                elif(count < self.numberofpancakes):
+                    newnode = [(-1)*prevnode[count]] + prevnode[0:count] +prevnode[count+1:]
+                else:
+                    newnode = [(-1)*prevnode[count]] + prevnode[0:count-1] 
+                prevnode = newnode
+                count = count +1
                 childnodes.append(self.addNode(copy.copy(newnode)))
             cNode.setchildNodes(childnodes)
-#         print len(cNode.childnodes)        
         return cNode.childnodes
       
     def addNode(self, nNodeTuple, isgoal=False):
         aNode = self.getNode(nNodeTuple)
         if isgoal:
             aNode.isgoal = True
-    
         return aNode    
              
     def getNode(self, nNodeTuple):        
@@ -133,4 +123,3 @@ class Node(object):
     def isgoalState(self):
         return self.isgoal
     #Calculate greedyHeuristic for Problem
-

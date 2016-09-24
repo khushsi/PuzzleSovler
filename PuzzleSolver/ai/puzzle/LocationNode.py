@@ -1,6 +1,6 @@
 class LocationNode(object):
     
-    def __init__(self, LocationName, location=(0,0), isgoal=False):
+    def __init__(self, LocationName, location, isgoal=False):
         self.name = LocationName 
         self.location = location
         self.isgoal = isgoal
