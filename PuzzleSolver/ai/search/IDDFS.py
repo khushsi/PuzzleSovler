@@ -23,6 +23,7 @@ def search(cPuzzle):
         while(maxdepth  >= dfscount):
             dfscount = dfscount + 1
             depth = 0
+
 #             print "outgoing DFS Count " + str(dfscount)
             evalp,maxfrontiersizer,maxvisitedlistsizer,totalnumberofnodesgeneratedr,maxdepth = inBFS(startnode,depth,dfscount,cPuzzle)
             if(maxfrontiersize < maxfrontiersizer):
@@ -45,15 +46,13 @@ def search(cPuzzle):
 def inBFS(startnode,depth,dfscount,cPuzzle):
     try:
         visitedList=[]
-        evaluatedPath=[]
         frontierQueue=Queue();
         depthqueue = Queue();
         maxfrontiersize=0
-        maxvisitedlistsize=0
         totalnumberofnodesgenerated=0
         maxdepth=0
         if startnode is None:
-            return [],maxfrontiersize,maxvisitedlistsize,totalnumberofnodesgenerated,maxdepth
+            return [],maxfrontiersize,len(visitedList),totalnumberofnodesgenerated,maxdepth
         
 #         print "---DFS Iteration :: "+ str(dfscount)
         frontierQueue.put(startnode)
@@ -67,28 +66,23 @@ def inBFS(startnode,depth,dfscount,cPuzzle):
             
         
         while(frontierQueue.qsize() > 0):
-            
-            totalnumberofnodesgenerated = totalnumberofnodesgenerated + 1
             generatedNode = frontierQueue.get();
             depth = depthqueue.get()
             if(depth > dfscount):
-                return [],maxfrontiersize,maxvisitedlistsize,totalnumberofnodesgenerated,maxdepth
+                return [],maxfrontiersize,len(visitedList),totalnumberofnodesgenerated,maxdepth
     
     #         print "---BFS Iteration for depth :: "+ str(depth)                
     #         print "FQ : GEt : "+ generatedNode.printNode()
-            
                     
             if generatedNode not in visitedList:
-                evaluatedPath.append(generatedNode)
+                
     
                 if generatedNode.isgoalState():
-    #                 for i in evaluatedPath:
-    #                     print i.printNode()                
-                    return evaluatedPath,maxfrontiersize,maxvisitedlistsize,totalnumberofnodesgenerated,maxdepth        
+                    return visitedList +[generatedNode],maxfrontiersize,len(visitedList),totalnumberofnodesgenerated,maxdepth        
             
+                totalnumberofnodesgenerated = totalnumberofnodesgenerated + 1
+                
                 visitedList.append(generatedNode)
-                if(maxvisitedlistsize < len(visitedList)):
-                    maxvisitedlistsize = len(visitedList)
                                  
                 for childnode in cPuzzle.getChildNodes(generatedNode):
                     if(childnode not in visitedList):
@@ -105,4 +99,4 @@ def inBFS(startnode,depth,dfscount,cPuzzle):
     except Exception,e:
         print(str(e))
         
-    return [],maxfrontiersize,maxvisitedlistsize,totalnumberofnodesgenerated,maxdepth                
+    return [],maxfrontiersize,len(visitedList),totalnumberofnodesgenerated,maxdepth                

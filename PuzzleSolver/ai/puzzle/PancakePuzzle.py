@@ -122,4 +122,7 @@ class Node(object):
              
     def isgoalState(self):
         return self.isgoal
+    
+    def getCost(self):
+        return 1
     #Calculate greedyHeuristic for Problem

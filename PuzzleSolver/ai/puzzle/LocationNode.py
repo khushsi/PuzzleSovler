@@ -13,3 +13,10 @@ class LocationNode(object):
     def isgoalState(self):
         return self.isgoal
     
+    def getCost(self,tonode=None):
+        
+        if(tonode is not None):
+            return self.childnodeswithcost[tonode]
+        else:
+            return 1
+    
