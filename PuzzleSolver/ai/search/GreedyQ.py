@@ -4,67 +4,72 @@ Created on 16-Sep-2016
 @author: khush
 '''
 from Queue import  PriorityQueue
-from ai.utility.PriorityQueueE import PriorityQueueE
 import copy
 
+from ai.utility.PriorityQueueE import PriorityQueueE
 
-class Uniform:  # @IndentOk
+
+class GreedyQ:  # @IndentOk
     '''
       Breath First Search  
     '''
-def search(startnode):
+def search(cPuzzle):
     try:
-#         visitedList=[]
+        heuristicfn = cPuzzle.heuristicf
         
+        parentNode=[]
+        startnode = cPuzzle.startNode 
         maxfrontiersize=0
-#         maxvisitedlistsize=0
         totalnumberofnodesgenerated=0
         cost=0
         frontierQueue=PriorityQueueE()
-        exploredQueue=PriorityQueue()
+        
         if startnode is  None:
             return [],maxfrontiersize,0,totalnumberofnodesgenerated,cost
         
         #frontierQueue.put(startnode)
-        frontierQueue.put((0,[startnode]))
+        frontierQueue.put((heuristicfn(startnode),[startnode]))
+        
         #Update Max Frontier Queue Size
         if(maxfrontiersize < frontierQueue.qsize()):
             maxfrontiersize = frontierQueue.qsize()
             
-        #print "FQ : PUT : "+ startnode.printNode()
+#         print "FQ : PUT : "+ startnode.printNode()
         while(frontierQueue.qsize() > 0):
             nodegen=[]
             nodegen = copy.copy(frontierQueue.get());
+
             #Empty Queue
-                
             generatedNode = nodegen[1][len(nodegen[1])-1]
-            
-            totalnumberofnodesgenerated = totalnumberofnodesgenerated + 1
             
             if generatedNode.isgoalState():
                     newlist = copy.copy(nodegen[1])
-                    exploredQueue.put((nodegen[0],newlist))
                     
             else:
-                
-#                 visitedList.append(generatedNode)
-#                 if(maxvisitedlistsize < len(visitedList)):
-#                     maxvisitedlistsize = len(visitedList)
-                
-                #print generatedNode.childnodeswithcost.size()    
-                for childnode in generatedNode.childnodeswithcost.keys():
-                    
-                    if(childnode not in nodegen[1]):
-                        cost = generatedNode.childnodeswithcost[childnode] + nodegen[0]                        
-                        frontierQueue.put((cost,nodegen[1] + [childnode]))
+                if generatedNode not in parentNode:
+                    totalnumberofnodesgenerated = totalnumberofnodesgenerated + 1                
+                    c=0                        
+                    for childnode in cPuzzle.getChildNodes(generatedNode):
                         
+                        if(childnode not in parentNode):
+                            c=c+1
+                            cost = heuristicfn(childnode)                         
+                            frontierQueue.put((cost,nodegen[1] + [childnode]))
+                            
                     #Update Max Frontier Queue Size
                     if(maxfrontiersize < frontierQueue.qsize()):
                         maxfrontiersize = frontierQueue.qsize()
-                        #print "FQ : PUT : "+ childnode.printNode()
+                    if(c > 0 and generatedNode not in parentNode):
+                        parentNode.append(generatedNode)        
+                    elif generatedNode in parentNode:
+                        parentNode.remove(generatedNode)    
 
-        final = exploredQueue.get()
-        cost = final[0]
+        final = frontierQueue.getPath(cPuzzle.goalNode)
+        prev = None
+        cost=0
+        for i in final[1]:
+            cost = cost + i.getCost(prev)
+            prev = i 
         return final[1],maxfrontiersize,0,totalnumberofnodesgenerated,cost                  
     finally:
         abc=10

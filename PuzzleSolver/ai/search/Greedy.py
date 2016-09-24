@@ -9,11 +9,13 @@ import copy
 
 class Greedy:  # @IndentOk
     '''
-      Breath First Search  
+      DFS Greedy  
     '''
-def search(cPuzzle,heuristicfn):
+def search(cPuzzle):
     try:
-        visitedList=[]
+        heuristicfn = cPuzzle.heuristicfn
+        parentNodes = []
+        visitedList = []
         startnode = cPuzzle.startNode
         maxfrontiersize=0
         maxvisitedlistsize=0
@@ -25,7 +27,7 @@ def search(cPuzzle,heuristicfn):
             return [],maxfrontiersize,maxvisitedlistsize,totalnumberofnodesgenerated,cost
         
         #frontierQueue.put(startnode)
-#         print heuristicfn[startnode]
+    
         frontierQueue.put((heuristicfn[startnode],[startnode]))
         #Update Max Frontier Queue Size
         if(maxfrontiersize < frontierQueue.qsize()):

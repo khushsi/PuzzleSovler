@@ -4,7 +4,7 @@ Created on 16-Sep-2016
 @author: khush
 '''
 from Queue import LifoQueue
-class DFS:  # @IndentOk
+class DFS: 
     '''
       Depth First Search - no explore list - but check with parent nodes  
     '''
@@ -28,7 +28,7 @@ def search(cPuzzle):
         while(nodestack.qsize() > 0):
             generatedNode = nodestack.get();
             
-#            print "FQ : GET : "+ generatedNode.printNode()            
+#           print "FQ : GET : "+ generatedNode.printNode()            
             print generatedNode.printNode()            
             if( generatedNode  not in parentNode):
                 cost = cost + generatedNode.getCost()
@@ -51,7 +51,7 @@ def search(cPuzzle):
                     parentNode.append(generatedNode)        
                 elif generatedNode in parentNode:
                     parentNode.remove(generatedNode)    
-#                     print "FQ : PUT : "+ childnode.printNode()
+#       print "FQ : PUT : "+ childnode.printNode()
                     
     except Exception,e:
         print str(e)

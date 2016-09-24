@@ -8,9 +8,8 @@ import sys
 from ai.puzzle.JugPuzzle import JugPuzzle
 from ai.puzzle.PathPuzzle import PathPuzzle
 from ai.puzzle.PancakePuzzle import PancakePuzzle
-from ai.search import BFS, IDDFS, Uniform, DFS, Greedy, Astar, IDAstar, UniformQ, DFSV
+from ai.search import BFS, IDDFS, Uniform, DFS, Greedy, Astar, IDAstar, UniformQ, DFSV, GreedyQ
 from ai.search import AstarV
-
 import signal
 
 def handler(signum, frame):
@@ -20,8 +19,8 @@ def handler(signum, frame):
 
 if __name__ == '__main__':
 
-    signal.signal(signal.SIGALRM, handler)
-    signal.alarm(10)
+#     signal.signal(signal.SIGABRT, handler)
+#     signal.alarm(30 * 60)
     try:        
         
         inputArray=[]
@@ -56,9 +55,19 @@ if __name__ == '__main__':
             heuristiclist=dict()
             
             if(heuristic == "euclidean"):
-                heuristiclist = cPuzzle.getEuclideanHeuristic()
+                cPuzzle.heuristicf = cPuzzle.getEuclideanHeuristic
             elif(heuristic == "manhattan"):
-                heuristiclist = cPuzzle.getManhattanHeuristic()
+                cPuzzle.heuristicf = cPuzzle.getManhattanHeuristic
+            elif(heuristic == "pancake"):
+                cPuzzle.heuristicf = cPuzzle.getPancakeHeuristic
+            elif(heuristic == "pancakes"):
+                cPuzzle.heuristicf = cPuzzle.getPancakeHeuristicSimple
+            elif(heuristic == "flips"):
+                cPuzzle.heuristicf = cPuzzle.getflipsHeuristic
+            elif(heuristic == "dist-flips"):
+                cPuzzle.heuristicf = cPuzzle.getdistpanHeuristic
+            elif(heuristic == "dotproduct"):
+                cPuzzle.heuristicf = cPuzzle.getDotProductHeuristic
             
                 
             if(searchalgo.lower() == "bfs"):
@@ -70,13 +79,11 @@ if __name__ == '__main__':
             elif (searchalgo.lower() == "uniform"):
                 cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,cost = UniformQ.search(cPuzzle)
             elif (searchalgo.lower() == "greedy"):
-                cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,cost = Greedy.search(cPuzzle,heuristiclist)
+                cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,cost = GreedyQ.search(cPuzzle)
             elif (searchalgo.lower() == "astar"):
                 cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,cost =  Astar.search(cPuzzle,heuristiclist)
             elif (searchalgo.lower() == "idastar"):
                 cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,cost,cutoff =  IDAstar.search(cPuzzle,heuristiclist)
-            elif (searchalgo.lower() == "uniformq"):
-                cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,cost = UniformQ.search(cPuzzle)
             elif (searchalgo.lower() == "dfsv"):
                 cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated = DFSV.search(cPuzzle)
 
@@ -91,7 +98,7 @@ if __name__ == '__main__':
             print("Space Complexity Queue:" + str(maxstoredquesize))
             print( "Space Complexity VisitedList:" + str(maxvisitedlistsize))
 
-            if (searchalgo.lower() not in ['bfs','dfs','dfsv']):
+            if (searchalgo.lower() not in ['bfs','dfs','dfsv','iddfs']):
                 print( "PathCost:" + str(cost))
             
             if (searchalgo == "iddfs"):
@@ -99,9 +106,8 @@ if __name__ == '__main__':
             elif(searchalgo == "idastar"):
                 print( "Cut-off Reached : " + str(cutoff))    
     
-    
-    finally:
-        signal.alarm(0)    # reset
-        print "Time out"        
+#     except:
+#         print("Time out")
+    finally:        
         f.close()
         

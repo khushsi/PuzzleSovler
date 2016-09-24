@@ -6,18 +6,20 @@ Created on 16-Sep-2016
 from ai.puzzle.LocationNode import LocationNode
 import math
 
-
 class PathPuzzle(object):
     '''
     Path Puzzle
     '''
            
-    def __init__(self,inputArray):
+    def __init__(self,inputArray,heuristicfunction=None):
         '''
         Constructor
         '''
-        self.nodesList=[]
+        self.nodesList = []        
+        self.heuristicfn = dict()
+        self.heuristicf = self.getEuclideanHeuristic
         inputnodelist = eval(inputArray[1])
+
         for i in inputnodelist:
             self.addNode(i[0],(i[1],i[2]))
         
@@ -28,7 +30,7 @@ class PathPuzzle(object):
         if(self.goalNode):
             self.goalNode.isgoal= True
         self.createChildNodes(inputArray[4:]);
-            
+
                              
     def createChildNodes(self,inputArray):        
         for i in inputArray:
@@ -47,35 +49,27 @@ class PathPuzzle(object):
         return cNode.childnodes
     
     def addNode(self,LocationName, location, isgoal=False):        
-        
         returnNode = LocationNode(LocationName, location, isgoal=False)
         self.nodesList.append(returnNode)
         return returnNode    
        
     def getNode(self,LocationName):      
-        
         for i in self.nodesList:
             if(i.name == LocationName):
                 return i
         return None
     
     #Calculate greedyHeuristic for Problem
-    def getEuclideanHeuristic(self):
-        greedyfn = dict()
-        dist=0.0
-        for nodev in self.nodesList:
-#             print nodev.printNode()
-            dist = math.sqrt(((math.pow(nodev.location[0]-self.goalNode.location[0],2)) + math.pow((nodev.location[1]-self.goalNode.location[1]),2)))
-            greedyfn[nodev] = dist
-        return greedyfn
+    def getEuclideanHeuristic(self,nodev=None):
+        dist = math.sqrt(((math.pow(nodev.location[0]-self.goalNode.location[0],2)) + math.pow((nodev.location[1]-self.goalNode.location[1]),2)))
+        return dist
+
         
-    def getManhattanHeuristic(self):
-        greedyfn = dict()
-        dist=0.0
-        for nodev in self.nodesList:
-            dist = abs(nodev.location[0]-self.goalNode.location[0]) + abs(nodev.location[1]-self.goalNode.location[1])
-            greedyfn[nodev] = dist
-        return greedyfn
-        
+    def getManhattanHeuristic(self,nodev=None):        
+        dist = abs( nodev.location[0]-self.goalNode.location[0]) + abs(nodev.location[1]-self.goalNode.location[1])
+        return dist
     
-    
+    def getDotProductHeuristic(self,nodev=None):
+        dist = sum(map(int.__mul__,nodev.location,self.goalNode.location))
+        self.heuristicfn[nodev] = dist
+        return dist

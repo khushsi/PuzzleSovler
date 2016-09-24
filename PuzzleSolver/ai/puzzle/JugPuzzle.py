@@ -17,15 +17,17 @@ class JugPuzzle(object):
         maxsize = eval(inputArray[1])
         initialsize = eval(inputArray[2])
         goal = eval(inputArray[3])
-         
+        self.heuristicfn = dict()
+        self.heuristicf = self.getEuclideanHeuristic
         self.nodesList = []        
         self.maxJug1 = maxsize[0]
         self.maxJug2 = maxsize[1]
-        self.getNode(initialsize)
-        self.startNode = self.nodesList[0]
-        self.goalNode = self.getNode(goal, True)
-                 
-             
+
+        self.addGoalNode(goal)
+        self.goalNode = self.getNode(goal, True)        
+        self.startNode = self.getNode(initialsize)        
+        
+        
     def getChildNodes(self, cNode):
 
         childnodes = []
@@ -73,19 +75,17 @@ class JugPuzzle(object):
                 if(tempnode is not cNode and tempnode not in childnodes and tempnode is not self.startNode):
                     childnodes.append(tempnode)
              
- 
             cNode.childnodes=childnodes
         return cNode.childnodes
       
     def getCost(self):
         return 1;
-          
-#     def addNode(self, nNodeTuple, isgoal=False):
-#         aNode = self.getNode(nNodeTuple)
-#         if isgoal:
-#             aNode.isgoal = True
-#         return aNode    
-             
+    def addGoalNode(self, nNodeTuple):        
+        returnNode = Node(nNodeTuple,True)
+        self.heuristicfn[returnNode]=0.0
+        self.nodesList.append(returnNode)
+        return returnNode    
+      
     def getNode(self, nNodeTuple,isgoal=False):        
         nodeExists = False
         returnNode = None
@@ -97,25 +97,26 @@ class JugPuzzle(object):
          
         if(nodeExists != True):
             returnNode = Node(nNodeTuple,isgoal)
+            self.heuristicf(returnNode)
             self.nodesList.append(returnNode)
        
         return returnNode    
 
-    def getEuclideanHeuristic(self):
-        greedyfn = dict()
+    def getEuclideanHeuristic(self,nodev):
         dist=0.0
-        for nodev in self.nodesList:
-            dist = (math.pow(nodev.jug[0]-self.goalNode.jug[0],2)) + math.pow((nodev.jug[1]-self.goalNode.jug[1]),2)
-            greedyfn[nodev] = dist
-        return greedyfn
+        dist = math.sqrt(math.pow(nodev.jug[0]-self.goalNode.jug[0],2) + math.pow(nodev.jug[1]-self.goalNode.jug[1],2))
+        self.heuristicfn[nodev] = dist
+        return dist
 
-    def getManhattanHeuristic(self):
-        greedyfn = dict()
-        dist=0.0
-        for nodev in self.nodesList:
-            dist = (abs(nodev.jug[0]-self.goalNode.jug[0])) + abs((nodev.jug[1]-self.goalNode.jug[1]))
-            greedyfn[nodev] = dist
-        return greedyfn
+    def getDotProductHeuristic(self,nodev):
+        dist = sum(map(abs,map(int.__mul__,nodev.jug,self.goalNode.jug)))
+        self.heuristicfn[nodev] = dist
+        return dist
+
+    def getManhattanHeuristic(self,nodev=None):
+        dist = (abs(nodev.jug[0]-self.goalNode.jug[0])) + abs((nodev.jug[1]-self.goalNode.jug[1]))
+        self.heuristicfn[nodev] = dist
+        return dist
         
                
 class Node(object):
@@ -142,5 +143,5 @@ class Node(object):
         return   self.childnodes
 
     
-    def getCost(self):
+    def getCost(self,tonode=None):
         return 1

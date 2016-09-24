@@ -18,5 +18,5 @@ class LocationNode(object):
         if(tonode is not None):
             return self.childnodeswithcost[tonode]
         else:
-            return 1
+            return 0
     

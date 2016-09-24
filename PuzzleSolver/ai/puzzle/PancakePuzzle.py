@@ -6,7 +6,6 @@ Created on 16-Sep-2016
 from Queue import Queue, LifoQueue
 import copy
 import math
-from xml.dom.minicompat import NodeList
 
 
 class PancakePuzzle(object):
@@ -18,18 +17,16 @@ class PancakePuzzle(object):
         '''
         Constructor
         '''
+        self.nodesList = []        
         initialstate = list(eval(inputArray[1]))
+        self.heuristicfn = dict()
+        self.heuristicf = self.getPancakeHeuristic
         
         self.numberofpancakes = len(initialstate)
         goal = list(range(1,self.numberofpancakes+1))
-         
-        self.nodesList = []        
-
-        self.addNode(initialstate)
-        self.startNode = self.nodesList[0]
-        self.goalNode = self.addNode(goal, True)
-        for i in self.nodesList:
-            self.getChildNodes(i)       
+        self.goalNode = self.addGoalNode(goal)        
+        self.startNode =self.getNode(initialstate) 
+        
              
     def getChildNodes(self, cNode):
         childnodes=[]
@@ -47,17 +44,17 @@ class PancakePuzzle(object):
                     newnode = [(-1)*prevnode[count]] + prevnode[0:count-1] 
                 prevnode = newnode
                 count = count +1
-                childnodes.append(self.addNode(copy.copy(newnode)))
+                childnodes.append(self.getNode(copy.copy(newnode)))
             cNode.setchildNodes(childnodes)
         return cNode.childnodes
       
-    def addNode(self, nNodeTuple, isgoal=False):
-        aNode = self.getNode(nNodeTuple)
-        if isgoal:
-            aNode.isgoal = True
-        return aNode    
-             
-    def getNode(self, nNodeTuple):        
+    def addGoalNode(self, nNodeTuple):        
+        returnNode = Node(nNodeTuple,True)
+        self.heuristicfn[returnNode]=0.0
+        self.nodesList.append(returnNode)
+        return returnNode
+    
+    def getNode(self, nNodeTuple,isgoal=False):        
         nodeExists = False
         returnNode = None
          
@@ -67,39 +64,50 @@ class PancakePuzzle(object):
                 nodeExists = True               
                 
         if(nodeExists != True):            
-            returnNode = Node(nNodeTuple)
-#             print "node created " + returnNode.printNode()
+            returnNode = Node(nNodeTuple,isgoal)
             self.nodesList.append(returnNode)
        
         return returnNode    
 
-    def getEuclideanHeuristic(self):
-        greedyfn = dict()
-        dist=0.0        
-        for nodev in self.nodesList:
-            list1 = [abs(number) for number in nodev.jug]
-            list2 = self.goalNode.jug
-            diff =  [abs(list1[i]-list2[i]) for i in range(self.numberofpancakes)]
-            dist = len([x for x in nodev.jug if x < 0])  + sum(diff)
-            greedyfn[nodev] = dist
-        return greedyfn
+    def getPancakeHeuristic(self,nodev):
+        list1 = nodev.jug
+        list2 = self.goalNode.jug
+        diff =  map(abs,map(int.__sub__, list1,list2))
+        dist = abs(len([x for x in nodev.jug if x < 0])  + sum(diff))
+        return dist
 
-    def getPancakeHeuristic(self):
-        greedyfn = dict()
-        dist=0.0
-        for nodev in self.nodesList:            
-            dist = (math.pow(nodev.jug[0]-self.goalNode.jug[0],2)) + math.pow((nodev.jug[1]-self.goalNode.jug[1]),2)
-            greedyfn[nodev] = dist
-        return greedyfn
+    def getflipsHeuristic(self,nodev):
+        list1 = nodev.jug
+        list2 = self.goalNode.jug
+        diff =  map(abs,map(int.__sub__, list1,list2))
+        dist = abs(len([x for x in nodev.jug if x < 0]))
+        return dist
 
-    def getManhattanHeuristic(self):
-        greedyfn = dict()
-        dist=0.0
-        for nodev in self.nodesList:
-            dist = (abs(nodev.jug[0]-self.goalNode.jug[0])) + abs((nodev.jug[1]-self.goalNode.jug[1]))
-            greedyfn[nodev] = dist
-        return greedyfn
-        
+    def getdistpanHeuristic(self,nodev):
+        list1 = nodev.jug
+        list2 = self.goalNode.jug
+        diff =  map(abs,map(int.__sub__, list1,list2))
+        dist = abs(len([x for x in nodev.jug if x < 0]) - sum(diff))
+        return dist
+
+    def getEuclideanHeuristic(self,nodev):
+        dist =round(math.sqrt(sum([ math.pow(x,2) for x in map(abs,map(int.__sub__,nodev.jug,self.goalNode.jug))])))
+        return dist
+
+    def getManhattanHeuristic(self,nodev):
+        dist = sum(map(abs,map(int.__sub__,nodev.jug,self.goalNode.jug)))
+        self.heuristicfn[nodev] = dist
+        return dist
+    
+    def getDotProductHeuristic(self,nodev):
+        dist = sum(map(abs,map(int.__mul__,nodev.jug,self.goalNode.jug)))
+        self.heuristicfn[nodev] = dist
+        return dist
+
+    def getCountWrongLocation(self,nodev):
+        dist = sum(map(abs,map(int.__eq__,nodev.jug,self.goalNode.jug)))
+        self.heuristicfn[nodev] = dist
+        return dist
                
 class Node(object):
      
@@ -123,6 +131,6 @@ class Node(object):
     def isgoalState(self):
         return self.isgoal
     
-    def getCost(self):
+    def getCost(self,tonode=None):
         return 1
     #Calculate greedyHeuristic for Problem

@@ -14,19 +14,18 @@ class Astar:  # @IndentOk
     '''
 def search(cPuzzle,heuristicfn):
     try:
-#         visitedList=[]
         startnode=cPuzzle.startNode
         maxfrontiersize=0
-#         maxvisitedlistsize=0
+        heuristicfn = cPuzzle.heuristicf
+        parentNode = []
         totalnumberofnodesgenerated=0
         cost=0
         frontierQueue=PriorityQueueE()
-        exploredQueue=PriorityQueue()
         if startnode is  None:
             return [],maxfrontiersize,0,totalnumberofnodesgenerated,cost
         
         #frontierQueue.put(startnode)
-        frontierQueue.put((heuristicfn[startnode],[startnode]))
+        frontierQueue.put((heuristicfn(startnode),[startnode]))
         #Update Max Frontier Queue Size
         if(maxfrontiersize < frontierQueue.qsize()):
             maxfrontiersize = frontierQueue.qsize()
@@ -36,41 +35,47 @@ def search(cPuzzle,heuristicfn):
             nodegen=[]
             nodegen = copy.copy(frontierQueue.get());
             #Empty Queue
-                
+            
             generatedNode = nodegen[1][len(nodegen[1])-1]
 #             visitedList.append(generatedNode)
-            parentNode = None    
+             
             if(len(nodegen[1]) > 1):
-                parentNode= nodegen[1][len(nodegen[1])-2]
-            
-            totalnumberofnodesgenerated = totalnumberofnodesgenerated + 1
-            
-            if generatedNode.isgoalState():
-                    newlist = copy.copy(nodegen[1])
-                    exploredQueue.put((nodegen[0],newlist))
-                    
-            else:
+                parentNode.append(nodegen[1][len(nodegen[1])-2])
 
-
-                currentdistance = 0
-                previousheuristic=heuristicfn[generatedNode]
-                
-#                 print len(nodegen[1])
-#                 print len(generatedNode.childnodeswithcost)    
-                for childnode in cPuzzle.getChildNodes(generatedNode):
-                    if childnode  not in nodegen[1]:
-                        currentdistance = generatedNode.childnodeswithcost[childnode]
-                        cost = heuristicfn[childnode] + nodegen[0] + currentdistance - previousheuristic
-                        frontierQueue.put((cost,nodegen[1] + [childnode]))
+            if(generatedNode not in parentNode):
+           
+                if generatedNode.isgoalState():
+                        newlist = copy.copy(nodegen[1])
+                else:
+                    totalnumberofnodesgenerated = totalnumberofnodesgenerated + 1
+                    currentdistance = 0
+                    previousheuristic=heuristicfn(generatedNode)
                     
+                    c=0    
+                    for childnode in cPuzzle.getChildNodes(generatedNode):
+                        if childnode  not in parentNode:
+                            c=c+1
+                            currentdistance = generatedNode.getCost(childnode)
+                            cost = heuristicfn(childnode) + nodegen[0] + currentdistance - previousheuristic
+                            frontierQueue.put((cost,nodegen[1] + [childnode]))
+                        
                     #Update Max Frontier Queue Size
                     if(maxfrontiersize < frontierQueue.qsize()):
                         maxfrontiersize = frontierQueue.qsize()
+                    if(c > 0 and generatedNode not in parentNode):
+                        parentNode.append(generatedNode)        
+                    elif generatedNode in parentNode:
+                        parentNode.remove(generatedNode)    
+                    
 #                         print "FQ : PUT : "+ childnode.printNode()
 
-        final = exploredQueue.get()
-        cost = final[0]
-        
+        final = frontierQueue.getPath(cPuzzle.goalNode)
+        prev = None
+        cost=0
+        for i in final[1]:
+            cost = cost + i.getCost(prev)
+            prev = i 
+
         return final[1],maxfrontiersize,0,totalnumberofnodesgenerated,cost                  
     finally:
         abc=10

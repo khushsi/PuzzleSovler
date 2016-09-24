@@ -43,3 +43,6 @@ class PriorityQueueE(object):
     def qsize(self):
         return self.queuemain.qsize()
     
+    def getPath(self,d):
+        if(self.objectdicti[d]):
+            return self.objectdicti[d]
