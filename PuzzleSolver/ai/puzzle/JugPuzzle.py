@@ -4,7 +4,7 @@ Created on 16-Sep-2016
 @author: khush
 '''
 import math
- 
+
 class JugPuzzle(object):
     '''
     classdocs
@@ -33,15 +33,14 @@ class JugPuzzle(object):
         if(len(cNode.childnodes) == 0):              
             ''' Fill Jug to Max '''
             if(cNode.jug[0] < self.maxJug1):
-                childnodes.append(self.getNode((self.maxJug1, cNode.jug[1])))
+                tempnode = self.getNode((self.maxJug1, cNode.jug[1]))
+                if tempnode is not cNode and tempnode is not self.startNode:
+                    childnodes.append(tempnode)
             if(cNode.jug[1] < self.maxJug2):
-                childnodes.append(self.getNode((cNode.jug[0], self.maxJug2)))
-            ''' Empty one Jug '''
-            if(cNode.jug[0] > 0):
-                childnodes.append(self.getNode((0, cNode.jug[1])))
-            if(cNode.jug[1] > 0):
-                childnodes.append(self.getNode((cNode.jug[0], 0)))
-             
+                tempnode = self.getNode((cNode.jug[0], self.maxJug2))
+                if(tempnode is not cNode and tempnode not in childnodes and tempnode is not self.startNode):
+                    childnodes.append(tempnode)
+
             '''Transfer from 1 jug to Other'''    
             if(cNode.jug[1] < self.maxJug2 and cNode.jug[0] > 0):
                 if(cNode.jug[0] + cNode.jug[1] >= self.maxJug2):
@@ -49,7 +48,9 @@ class JugPuzzle(object):
                 else:
                     nc2 = cNode.jug[0] + cNode.jug[1]
                 nc1 = cNode.jug[0] - (nc2 - cNode.jug[1]);    
-                childnodes.append(self.getNode((nc1, nc2)))
+                tempnode = self.getNode((nc1, nc2))
+                if(tempnode is not cNode and tempnode not in childnodes and tempnode is not self.startNode):
+                    childnodes.append(tempnode)
      
             if(cNode.jug[0] < self.maxJug1 and cNode.jug[1] > 0):
                 if(cNode.jug[0] + cNode.jug[1] >= self.maxJug1):
@@ -57,7 +58,21 @@ class JugPuzzle(object):
                 else:
                     nc1 = cNode.jug[0] + cNode.jug[1]
                 nc2 = cNode.jug[1] - (nc1 - cNode.jug[0]);    
-                childnodes.append(self.getNode((nc1, nc2)))
+                tempnode = self.getNode((nc1, nc2))
+                if(tempnode is not cNode and tempnode not in childnodes and tempnode is not self.startNode):
+                    childnodes.append(tempnode)
+
+            ''' Empty one Jug '''
+            if(cNode.jug[0] > 0):
+                tempnode = self.getNode((0, cNode.jug[1]))
+                if(tempnode is not cNode and tempnode not in childnodes and tempnode is not self.startNode):
+                    childnodes.append(tempnode)
+                
+            if(cNode.jug[1] > 0):
+                tempnode=self.getNode((cNode.jug[0], 0))
+                if(tempnode is not cNode and tempnode not in childnodes and tempnode is not self.startNode):
+                    childnodes.append(tempnode)
+             
  
             cNode.childnodes=childnodes
         return cNode.childnodes
@@ -125,6 +140,7 @@ class Node(object):
 
     def getChildNodes(self):
         return   self.childnodes
+
     
     def getCost(self):
         return 1

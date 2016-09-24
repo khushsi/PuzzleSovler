@@ -8,7 +8,7 @@ import sys
 from ai.puzzle.JugPuzzle import JugPuzzle
 from ai.puzzle.PathPuzzle import PathPuzzle
 from ai.puzzle.PancakePuzzle import PancakePuzzle
-from ai.search import BFS, IDDFS, Uniform, DFS, Greedy, Astar, IDAstar, UniformQ
+from ai.search import BFS, IDDFS, Uniform, DFS, Greedy, Astar, IDAstar, UniformQ, DFSV
 from ai.search import AstarV
 
 
@@ -70,13 +70,16 @@ if __name__ == '__main__':
                 cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,cost,cutoff =  IDAstar.search(cPuzzle,heuristiclist)
             elif (searchalgo.lower() == "uniformq"):
                 cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,cost = UniformQ.search(cPuzzle)
+            elif (searchalgo.lower() == "dfsv"):
+                cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated = DFSV.search(cPuzzle)
 
                 
-            if(len(cSearch) == 0):
-                print( "No Solution")    
-            else:
-                for evnode in cSearch:
-                    print( evnode.printNode())
+            if(searchalgo.lower() != "dfs" and searchalgo.lower() != "dfsv"):
+                if(len(cSearch) == 0):
+                    print( "No Solution")    
+                else:
+                    for evnode in cSearch:
+                        print( evnode.printNode())
             print("Time Complexity:" + str(totalnumberofnodesgenerated))    
             print("Space Complexity Queue:" + str(maxstoredquesize))
             print( "Space Complexity VisitedList:" + str(maxvisitedlistsize))
