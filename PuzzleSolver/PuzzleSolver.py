@@ -11,9 +11,17 @@ from ai.puzzle.PancakePuzzle import PancakePuzzle
 from ai.search import BFS, IDDFS, Uniform, DFS, Greedy, Astar, IDAstar, UniformQ, DFSV
 from ai.search import AstarV
 
+import signal
+
+def handler(signum, frame):
+    print "Forever is over!"
+    raise Exception("end of time")
+   
 
 if __name__ == '__main__':
-    
+
+    signal.signal(signal.SIGALRM, handler)
+    signal.alarm(10)
     try:        
         
         inputArray=[]
@@ -82,13 +90,18 @@ if __name__ == '__main__':
             print("Time Complexity:" + str(totalnumberofnodesgenerated))    
             print("Space Complexity Queue:" + str(maxstoredquesize))
             print( "Space Complexity VisitedList:" + str(maxvisitedlistsize))
-            print( "PathCost:" + str(cost))
+
+            if (searchalgo.lower() not in ['bfs','dfs','dfsv']):
+                print( "PathCost:" + str(cost))
+            
             if (searchalgo == "iddfs"):
                 print( "Depth Iterated : " + str(maxdepth))
             elif(searchalgo == "idastar"):
                 print( "Cut-off Reached : " + str(cutoff))    
-                
+    
+    
     finally:
+        signal.alarm(0)    # reset
+        print "Time out"        
         f.close()
-    
-    
+        
