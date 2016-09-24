@@ -56,10 +56,9 @@ if __name__ == '__main__':
             if(searchalgo.lower() == "bfs"):
                 cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,cost = BFS.search(cPuzzle)
             elif (searchalgo.lower() == "dfs"):
-                cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated = DFS.search(cPuzzle)
+                cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,cost = DFS.search(cPuzzle)
             elif (searchalgo.lower() == "iddfs"):
-                cSearch,maxstoredquesize
-                maxvisitedlistsize,totalnumberofnodesgenerated,maxdepth = IDDFS.search(cPuzzle)
+                cSearch,maxstoredquesize, maxvisitedlistsize,totalnumberofnodesgenerated,maxdepth = IDDFS.search(cPuzzle)
             elif (searchalgo.lower() == "uniform"):
                 cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,cost = UniformQ.search(cPuzzle)
             elif (searchalgo.lower() == "greedy"):
