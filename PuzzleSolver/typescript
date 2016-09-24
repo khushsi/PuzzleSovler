@@ -1,0 +1,9 @@
+Script started on Thu, Sep 22, 2016 11:38:51 AM
+Traceback (most recent call last):
+  File "PuzzleSover.py", line 50, in <module>
+    heuristiclist = cPuzzle.getManhattanHeuristic()
+  File "/cygdrive/c/Users/khush/git/kmt81-hmwk1/PuzzleSolver/ai/puzzle/PathPuzzle.py", line 72, in getManhattanHeuristic
+    dist = abs(nodev.location[0]-self.goalNode.location[0]) + abs(nodev.location[1]-self.goalNode.location[1])
+AttributeError: 'NoneType' object has no attribute 'location'
+
+Script done on Thu, Sep 22, 2016 11:38:51 AM

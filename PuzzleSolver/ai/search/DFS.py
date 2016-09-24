@@ -35,8 +35,7 @@ def search(cPuzzle):
 #            print "FQ : GET : "+ generatedNode.printNode()            
             print generatedNode.printNode()            
             if( generatedNode  not in parentNode):
-                if generatedNode.isgoalState():
-                    
+                if generatedNode.isgoalState():                        
                     return [],maxfrontiersize,0,totalnumberofnodesgenerated
                 
                 totalnumberofnodesgenerated = totalnumberofnodesgenerated + 1
