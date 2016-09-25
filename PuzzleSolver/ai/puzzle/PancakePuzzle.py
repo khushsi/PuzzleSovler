@@ -133,4 +133,5 @@ class Node(object):
     
     def getCost(self,tonode=None):
         return 1
+    
     #Calculate greedyHeuristic for Problem

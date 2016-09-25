@@ -65,12 +65,17 @@ def search(cPuzzle):
                         parentNode.remove(generatedNode)    
 
         final = frontierQueue.getPath(cPuzzle.goalNode)
-        prev = None
         cost=0
-        for i in final[1]:
-            cost = cost + i.getCost(prev)
-            prev = i 
-        return final[1],maxfrontiersize,0,totalnumberofnodesgenerated,cost                  
+        if(final is not None):
+            prev = None
+            cost=0
+            for i in final[1]:
+                cost = cost + i.getCost(prev)
+                prev = i
+            eval=final[1]
+        else:
+            eval = []       
+        return eval,maxfrontiersize,0,totalnumberofnodesgenerated,cost                  
     finally:
         abc=10
         

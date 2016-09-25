@@ -12,8 +12,9 @@ class Astar:  # @IndentOk
     '''
       DFS  
     '''
-def search(cPuzzle,heuristicfn):
+def search(cPuzzle):
     try:
+        
         startnode=cPuzzle.startNode
         maxfrontiersize=0
         heuristicfn = cPuzzle.heuristicf
@@ -62,21 +63,25 @@ def search(cPuzzle,heuristicfn):
                     #Update Max Frontier Queue Size
                     if(maxfrontiersize < frontierQueue.qsize()):
                         maxfrontiersize = frontierQueue.qsize()
+
                     if(c > 0 and generatedNode not in parentNode):
                         parentNode.append(generatedNode)        
                     elif generatedNode in parentNode:
                         parentNode.remove(generatedNode)    
                     
-#                         print "FQ : PUT : "+ childnode.printNode()
+#                   print "FQ : PUT : "+ childnode.printNode()
 
         final = frontierQueue.getPath(cPuzzle.goalNode)
-        prev = None
-        cost=0
-        for i in final[1]:
-            cost = cost + i.getCost(prev)
-            prev = i 
-
-        return final[1],maxfrontiersize,0,totalnumberofnodesgenerated,cost                  
+        if(final is not None):
+            prev = None
+            cost=0
+            for i in final[1]:
+                cost = cost + i.getCost(prev)
+                prev = i
+            eval=final[1]
+        else:
+            eval = []       
+        return eval,maxfrontiersize,0,totalnumberofnodesgenerated,cost                  
     finally:
         abc=10
         

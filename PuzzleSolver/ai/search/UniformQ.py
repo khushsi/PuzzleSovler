@@ -39,8 +39,6 @@ def search(cPuzzle):
             #Empty Queue
             generatedNode = nodegen[1][len(nodegen[1])-1]
             
-            
-            
             if generatedNode.isgoalState():
                     newlist = copy.copy(nodegen[1])
                     
@@ -64,9 +62,17 @@ def search(cPuzzle):
                         parentNode.remove(generatedNode)    
 
         final = frontierQueue.getPath(cPuzzle.goalNode)
-        cost = final[0]
-        return final[1],maxfrontiersize,0,totalnumberofnodesgenerated,cost                  
+        cost=0
+        if(final is not None):
+            prev = None
+            for i in final[1]:
+                cost = cost + i.getCost(prev)
+                prev = i
+            eval=final[1]
+        else:
+            eval = []       
+        return eval,maxfrontiersize,0,totalnumberofnodesgenerated,cost                  
     finally:
         abc=10
         
-    return [],maxfrontiersize,0,totalnumberofnodesgenerated,cost      
+          

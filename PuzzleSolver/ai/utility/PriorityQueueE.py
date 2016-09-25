@@ -44,5 +44,7 @@ class PriorityQueueE(object):
         return self.queuemain.qsize()
     
     def getPath(self,d):
-        if(self.objectdicti[d]):
+        if(d in self.objectdicti.keys()):
             return self.objectdicti[d]
+        else:
+            return None

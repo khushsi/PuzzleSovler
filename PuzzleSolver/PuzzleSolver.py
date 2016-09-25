@@ -81,9 +81,9 @@ if __name__ == '__main__':
             elif (searchalgo.lower() == "greedy"):
                 cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,cost = GreedyQ.search(cPuzzle)
             elif (searchalgo.lower() == "astar"):
-                cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,cost =  Astar.search(cPuzzle,heuristiclist)
+                cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,cost =  Astar.search(cPuzzle)
             elif (searchalgo.lower() == "idastar"):
-                cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,cost,cutoff =  IDAstar.search(cPuzzle,heuristiclist)
+                cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated,cost,cutoff =  IDAstar.search(cPuzzle)
             elif (searchalgo.lower() == "dfsv"):
                 cSearch,maxstoredquesize,maxvisitedlistsize,totalnumberofnodesgenerated = DFSV.search(cPuzzle)
 
@@ -94,6 +94,7 @@ if __name__ == '__main__':
                 else:
                     for evnode in cSearch:
                         print( evnode.printNode())
+
             print("Time Complexity:" + str(totalnumberofnodesgenerated))    
             print("Space Complexity Queue:" + str(maxstoredquesize))
             print( "Space Complexity VisitedList:" + str(maxvisitedlistsize))
