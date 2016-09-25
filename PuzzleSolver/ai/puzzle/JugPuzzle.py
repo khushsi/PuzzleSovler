@@ -4,7 +4,7 @@ Created on 16-Sep-2016
 @author: khush
 '''
 import math
-
+from ai.utility.Utility import gcdcount
 class JugPuzzle(object):
     '''
     classdocs
@@ -118,6 +118,45 @@ class JugPuzzle(object):
         self.heuristicfn[nodev] = dist
         return dist
         
+    def getGcdHeuristic(self,nodev=None):
+        dist = 0.0
+        goal = max(self.goalNode.jug[0],self.goalNode.jug[1])
+        if(nodev.isgoalState()):
+            return 0
+        if(nodev is self.startNode):
+            return self.maxJug1 + self.maxJug2
+        jug1 = nodev.jug[0]
+        jug2 = nodev.jug[1]
+        if(jug1 == goal or jug2 == goal):
+            dist = 1
+            if(jug1 != 0 or jug2 != 0):
+                dist = dist +1
+        if(jug1 != goal and jug2 != goal):
+            dist = 1
+            if(jug1 != 0 and jug2 != 0):
+                dist = dist + gcdcount(gcdcount(jug1,jug2),goal)
+            elif jug1 == 0 and jug2 != 0 :
+                dist = dist + gcdcount(self.maxJug1,jug2)
+            elif jug1 != 0 and jug2 == 0 :
+#                 print gcdcount(self.maxJug2,jug1)
+                dist = dist + gcdcount(self.maxJug2,jug1)
+                
+    
+#         if(nodev.jug[0] == goal or nodev.jug[1]==goal):
+#             dist = 1
+#             if(nodev.jug[0] != 0 and nodev.jug[0] != goal):
+#                 dist = gcdcount
+#         if(nodev.jug[0] != goal and nodev.jug[1] != goal):
+#             dist = 1
+#             if(nodev.jug[0] != 0 and nodev.jug[1] != 0):
+#                 dist = dist + gcdcount(nodev.jug[0],nodev.jug[1])
+#             elif nodev.jug[1] == 0 and nodev.jug[0] != 0 :
+#                 dist = dist + gcdcount(nodev.jug[0],self.maxJug2)
+#             elif nodev.jug[0] == 0 :
+#                 dist = dist + gcdcount(nodev.jug[1],self.maxJug1)
+        
+        self.heuristicfn[nodev] = dist
+        return dist
                
 class Node(object):
      
