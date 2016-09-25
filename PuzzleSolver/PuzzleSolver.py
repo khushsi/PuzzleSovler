@@ -13,11 +13,13 @@ from ai.search import AstarV
 import signal
 
 def handler(signum, frame):
-    print "Forever is over!"
-    raise Exception("end of time")
-   
+    print "Cant solve in 30 minutes so timed out"
+    raise Exception("EOP")
 
 if __name__ == '__main__':
+
+    signal.signal(signal.SIGALRM, handler)
+    signal.alarm( 1800 )
 
 #     signal.signal(signal.SIGABRT, handler)
 #     signal.alarm(30 * 60)
@@ -68,6 +70,8 @@ if __name__ == '__main__':
                 cPuzzle.heuristicf = cPuzzle.getdistpanHeuristic
             elif(heuristic == "dotproduct"):
                 cPuzzle.heuristicf = cPuzzle.getDotProductHeuristic
+            elif(heuristic == "gcdjug"):
+                cPuzzle.heuristicf = cPuzzle.getGcdHeuristic
             
                 
             if(searchalgo.lower() == "bfs"):
@@ -107,8 +111,10 @@ if __name__ == '__main__':
             elif(searchalgo == "idastar"):
                 print( "Cut-off Reached : " + str(cutoff))    
     
-#     except:
-#         print("Time out")
-    finally:        
+    except:    
+        print("Time out")
+    
+    finally:
+        signal.alarm(0)
         f.close()
         
