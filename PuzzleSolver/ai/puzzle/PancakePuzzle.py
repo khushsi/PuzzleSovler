@@ -70,10 +70,15 @@ class PancakePuzzle(object):
         return returnNode    
 
     def getPancakeHeuristic(self,nodev):
-        list1 = nodev.jug
-        list2 = self.goalNode.jug
-        diff =  map(abs,map(int.__sub__, list1,list2))
-        dist = abs(len([x for x in nodev.jug if x < 0])  + sum(diff))
+        t = map(abs,nodev.jug)
+        diff = [1  for x in zip(t[1:],t[:-1]) if (abs(x[1]-x[0])-1) > 0]
+        dist =  sum(diff) 
+        return dist
+
+    def getPancakeHeuristicSimple(self,nodev):
+        t = map(abs,nodev.jug)
+        diff = [1  for x in zip(t[1:],t[:-1]) if (abs(x[1]-x[0])-1) > 0]
+        dist =  sum(diff) +  sum([1  for x in zip(t[1:],t[:-1]) if ((x[1]/abs(x[1]) +(x[0]/abs(x[0])))) == 0])
         return dist
 
     def getflipsHeuristic(self,nodev):
