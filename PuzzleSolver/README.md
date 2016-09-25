@@ -8,16 +8,17 @@ Python 2.7.10
 
 ## Usage / Running the program - WaterJug, PathFinder and Pancake Problem
 
-Command : Python testcasefile algorithm heuristic
-For example: To run astar algorithm on jug puzzle for euclidean heuristic 
+Command : Python PuzzleSolver.py testcasefile algorithm heuristic
+
+example: To run A* (astar) algorithm on jug puzzle for euclidean heuristic 
 
 ```
-python test_jugs.config astar euclidean
+python PuzzleSolver.py test_jugs.config astar euclidean
 ```
 example: To run bfs algorithm on jug puzzle 
 
 ```
-python test_jugs.config bfs
+python PuzzleSolver.py test_jugs.config bfs
 ```
 
 ## Options
@@ -57,3 +58,7 @@ pancake flips dist-flips
 #Discussions with other student
 #Program problematic parth
 Not able to run pancake test cases on bfs, dfs in 30 minutes
+
+##Development Environment
+`Centos`
+ 
