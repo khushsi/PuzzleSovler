@@ -61,8 +61,8 @@ def search(cPuzzle):
                         maxfrontiersize = frontierQueue.qsize()
                     if(c > 0 and generatedNode not in parentNode):
                         parentNode.append(generatedNode)        
-                    elif generatedNode in parentNode:
-                        parentNode.remove(generatedNode)    
+                    elif generatedNode in cPuzzle.getChildNodes(parentNode[-1]):
+                        parentNode.pop()
 
         final = frontierQueue.getPath(cPuzzle.goalNode)
         cost=0

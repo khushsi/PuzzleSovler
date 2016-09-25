@@ -66,8 +66,8 @@ def search(cPuzzle):
 
                     if(c > 0 and generatedNode not in parentNode):
                         parentNode.append(generatedNode)        
-                    elif generatedNode in parentNode:
-                        parentNode.remove(generatedNode)    
+                    elif generatedNode in cPuzzle.getChildNodes(parentNode[-1]):
+                        parentNode.pop()
                     
 #                   print "FQ : PUT : "+ childnode.printNode()
 

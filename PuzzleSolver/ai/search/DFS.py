@@ -30,27 +30,31 @@ def search(cPuzzle):
             
 #           print "FQ : GET : "+ generatedNode.printNode()            
             print generatedNode.printNode()            
-            if( generatedNode  not in parentNode):
-                cost = cost + generatedNode.getCost()
-                if generatedNode.isgoalState():                        
-                    return [],maxfrontiersize,0,totalnumberofnodesgenerated,cost
-                
-                totalnumberofnodesgenerated = totalnumberofnodesgenerated + 1
-                
-                c=0
-                for childnode in cPuzzle.getChildNodes(generatedNode):
+#             if( generatedNode  not in parentNode):
+            cost = cost + generatedNode.getCost()
+            if generatedNode.isgoalState():                        
+                return [],maxfrontiersize,0,totalnumberofnodesgenerated,cost
+            
+            totalnumberofnodesgenerated = totalnumberofnodesgenerated + 1
+            
+            c=0
+            for childnode in cPuzzle.getChildNodes(generatedNode):
 
-                    if(childnode  not in parentNode):
-                        c=c=+1
-                        nodestack.put(childnode)
-                    
-                if(maxfrontiersize < nodestack.qsize()):
-                    maxfrontiersize = nodestack.qsize()
+                if(childnode  not in parentNode):
+#                     print "child "+ childnode.printNode()
+                    c=c=+1
+                    nodestack.put(childnode)
+                
+            if(maxfrontiersize < nodestack.qsize()):
+                maxfrontiersize = nodestack.qsize()
 
-                if(c > 0 and generatedNode not in parentNode):
-                    parentNode.append(generatedNode)        
-                elif generatedNode in parentNode:
-                    parentNode.remove(generatedNode)    
+            if(c > 0 and generatedNode not in parentNode):
+                parentNode.append(generatedNode)        
+            elif generatedNode in cPuzzle.getChildNodes(parentNode[-1]):
+                parentNode.pop()
+            
+#             for i in parentNode:
+#                 print "parent node "+i.printNode()                
 #       print "FQ : PUT : "+ childnode.printNode()
                     
     except Exception,e:
