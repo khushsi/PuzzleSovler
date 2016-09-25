@@ -140,6 +140,7 @@ mv typescript "${typescriptfolder}/typescript.${i}.astar.flips"
 script -c "python PuzzleSolver.py ${i} astar dist-flips"
 mv typescript "${typescriptfolder}/typescript.${i}.astar.distflips"
 
+
 ##### informed Search - idastar 
 script -c "python PuzzleSolver.py ${i} idastar euclidean"
 mv typescript "${typescriptfolder}/typescript.${i}.idastar.euclidean"
