@@ -91,16 +91,18 @@ def IDAstar(startnode,heuristicfn,cutoff,cPuzzle):
                     #print generatedNode.childnodeswithcost.size()    
                     c=0 
                     for childnode in cPuzzle.getChildNodes(generatedNode):
-                        currentdistance = generatedNode.getCost(childnode)
-                        cost = heuristicfn(childnode) + nodegen[0] + currentdistance - generatednodeheuristic
                         c=c+1
-                        frontierQueue.put((cost,nodegen[1] + [childnode]))
-                        
-                        if(heuristicfn(childnode) > cutoff ):
+                        if(heuristicfn(childnode) > cutoff ):                            
                             if(nextcutoff == 0 ):
                                 nextcutoff = heuristicfn(childnode)
                             else:
+                            
                                 nextcutoff = min(nextcutoff,heuristicfn(childnode))
+                        else:
+                            currentdistance = generatedNode.getCost(childnode)
+                            cost = heuristicfn(childnode) + nodegen[0] + currentdistance - generatednodeheuristic
+                            frontierQueue.put((cost,nodegen[1] + [childnode]))
+       
                     #Update Max Frontier Queue Size
                     if(maxfrontiersize < frontierQueue.qsize()):
                         maxfrontiersize = frontierQueue.qsize()
