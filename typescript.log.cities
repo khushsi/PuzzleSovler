@@ -1,0 +1,234 @@
+Script started on Mon 26 Sep 2016 07:36:01 PM EDT
+]0;kmt81@molly:/data01/khushboo/aiassignment/tocreatetypescriptfolder/kmt81-hmwk1/PuzzleSolver[?1034h[kmt81@molly PuzzleSolver]$ exitpython PuzzleSolver.py test_jugs.config idastar gcdjugmanhattaneuclidean[5Pastar gcdjugmanhattaneuclidean[2Pgreedy gcdjug[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kcities.config d[Kbfs
+C00
+C10
+C01
+C11
+C20
+C21
+C02
+C12
+C22
+C30
+C31
+C32
+C03
+C13
+C23
+C33
+C40
+C41
+C42
+C43
+Time Complexity:19
+Space Complexity Queue:30
+Space Complexity VisitedList:19
+]0;kmt81@molly:/data01/khushboo/aiassignment/tocreatetypescriptfolder/kmt81-hmwk1/PuzzleSolver[kmt81@molly PuzzleSolver]$ python PuzzleSolver.py test_cities.config bfs[1Pfsdfs
+C00
+C11
+C20
+C31
+C40
+C41
+C32
+C23
+C14
+C03
+C12
+C21
+C30
+C10
+C01
+C02
+C13
+C22
+C33
+C42
+C43
+Time Complexity:20
+Space Complexity Queue:51
+Space Complexity VisitedList:0
+]0;kmt81@molly:/data01/khushboo/aiassignment/tocreatetypescriptfolder/kmt81-hmwk1/PuzzleSolver[kmt81@molly PuzzleSolver]$ python PuzzleSolver.py test_cities.config dfsidfs[Cdfs
+C00
+C10
+C01
+C11
+C20
+C21
+C02
+C12
+C22
+C30
+C31
+C32
+C03
+C13
+C23
+C33
+C40
+C41
+C42
+C43
+Time Complexity:49
+Space Complexity Queue:27
+Space Complexity VisitedList:19
+Depth Iterated : 6
+]0;kmt81@molly:/data01/khushboo/aiassignment/tocreatetypescriptfolder/kmt81-hmwk1/PuzzleSolver[kmt81@molly PuzzleSolver]$ python PuzzleSolver.py test_cities.config iddfs[C[K[K[K[K[Kuniform
+C00
+C11
+C20
+C30
+C40
+C31
+C41
+C32
+C42
+C33
+C43
+Time Complexity:24
+Space Complexity Queue:10
+Space Complexity VisitedList:0
+PathCost:15
+]0;kmt81@molly:/data01/khushboo/aiassignment/tocreatetypescriptfolder/kmt81-hmwk1/PuzzleSolver[kmt81@molly PuzzleSolver]$ python PuzzleSolver.py test_cities.config uniform[K[K[K[K[K[K[Kgreedy
+C00
+C11
+C22
+C33
+C43
+Time Complexity:24
+Space Complexity Queue:15
+Space Complexity VisitedList:0
+PathCost:21
+]0;kmt81@molly:/data01/khushboo/aiassignment/tocreatetypescriptfolder/kmt81-hmwk1/PuzzleSolver[kmt81@molly PuzzleSolver]$ python PuzzleSolver.py test_cities.config greedy euclidean
+C00
+C11
+C22
+C33
+C43
+Time Complexity:24
+Space Complexity Queue:15
+Space Complexity VisitedList:0
+PathCost:21
+]0;kmt81@molly:/data01/khushboo/aiassignment/tocreatetypescriptfolder/kmt81-hmwk1/PuzzleSolver[kmt81@molly PuzzleSolver]$ python PuzzleSolver.py test_cities.config greedy euclidean[K[K[K[K[K[K[K[K[Kmanhattan
+C00
+C11
+C22
+C33
+C43
+Time Complexity:24
+Space Complexity Queue:15
+Space Complexity VisitedList:0
+PathCost:21
+]0;kmt81@molly:/data01/khushboo/aiassignment/tocreatetypescriptfolder/kmt81-hmwk1/PuzzleSolver[kmt81@molly PuzzleSolver]$ python PuzzleSolver.py test_cities.config greedy manhattan[K[K[K[K[K[K[K[K[Kg[Kdotproduct
+C00
+C10
+C21
+C32
+C43
+Time Complexity:24
+Space Complexity Queue:8
+Space Complexity VisitedList:0
+PathCost:36
+]0;kmt81@molly:/data01/khushboo/aiassignment/tocreatetypescriptfolder/kmt81-hmwk1/PuzzleSolver[kmt81@molly PuzzleSolver]$ python PuzzleSolver.py test_cities.config greedy dotproduct[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kgreedy manhattaneuclidean[K euclidean[C[1P euclidean[1P euclidean[1P euclidean[1P euclidean[1P euclidean[1P euclideana euclideans euclideant euclideana euclideanr euclidean
+C00
+C11
+C20
+C30
+C40
+C31
+C41
+C32
+C42
+C33
+C43
+Time Complexity:24
+Space Complexity Queue:11
+Space Complexity VisitedList:0
+PathCost:11
+]0;kmt81@molly:/data01/khushboo/aiassignment/tocreatetypescriptfolder/kmt81-hmwk1/PuzzleSolver[kmt81@molly PuzzleSolver]$ python PuzzleSolver.py test_cities.config astar euclidean[1@i[1@d
+C00
+C11
+C20
+C30
+C40
+C31
+C41
+C32
+C42
+C33
+C43
+Time Complexity:21
+Space Complexity Queue:11
+Space Complexity VisitedList:0
+PathCost:16.0
+Cut-off Reached : 5.0
+]0;kmt81@molly:/data01/khushboo/aiassignment/tocreatetypescriptfolder/kmt81-hmwk1/PuzzleSolver[kmt81@molly PuzzleSolver]$ python PuzzleSolver.py test_cities.config idastar euclidean[2P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Kgreedy manhattan[1P manhattan[1P manhattan[1P manhattan[1P manhattan[1P manhattan[1P manhattana manhattans manhattant manhattana manhattanr manhattan
+C00
+C11
+C20
+C30
+C40
+C31
+C41
+C32
+C42
+C33
+C43
+Time Complexity:24
+Space Complexity Queue:11
+Space Complexity VisitedList:0
+PathCost:11
+]0;kmt81@molly:/data01/khushboo/aiassignment/tocreatetypescriptfolder/kmt81-hmwk1/PuzzleSolver[kmt81@molly PuzzleSolver]$ python PuzzleSolver.py test_cities.config astar manhattan[1@i[1@d
+C00
+C11
+C20
+C30
+C40
+C31
+C41
+C32
+C42
+C33
+C43
+Time Complexity:21
+Space Complexity Queue:11
+Space Complexity VisitedList:0
+PathCost:16
+Cut-off Reached : 7
+]0;kmt81@molly:/data01/khushboo/aiassignment/tocreatetypescriptfolder/kmt81-hmwk1/PuzzleSolver[kmt81@molly PuzzleSolver]$ python PuzzleSolver.py test_cities.config idastar manhattan[2P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cidastar euclidean[2P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Kgreedy manhattan[Kastar euclidean[2@id[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[2Pastar manhattan[2@id[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Kpython PuzzleSolver.py test_cities.config idastar manhattan[2P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cidastar euclidean[2P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Kgreedy manhattaneuclidean[Kuniform[2Piddfsuniform[1Pgreedy euclideanmanhattan[Kastar euclidean[2@id[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[2Pastar manhattan[2@id[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[2P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[Kdotproduct
+C00
+C11
+C20
+C30
+C40
+C31
+C41
+C32
+C42
+C33
+C43
+Time Complexity:24
+Space Complexity Queue:9
+Space Complexity VisitedList:0
+PathCost:11
+]0;kmt81@molly:/data01/khushboo/aiassignment/tocreatetypescriptfolder/kmt81-hmwk1/PuzzleSolver[kmt81@molly PuzzleSolver]$ python PuzzleSolver.py test_cities.config astar dotproduct[1@i[1@d
+C00
+C11
+C20
+C30
+C40
+C31
+C41
+C32
+C42
+C33
+C43
+Time Complexity:274
+Space Complexity Queue:9
+Space Complexity VisitedList:0
+PathCost:37
+Cut-off Reached : 25
+]0;kmt81@molly:/data01/khushboo/aiassignment/tocreatetypescriptfolder/kmt81-hmwk1/PuzzleSolver[kmt81@molly PuzzleSolver]$ exit
+exit
+
+Script done on Mon 26 Sep 2016 07:37:42 PM EDT
