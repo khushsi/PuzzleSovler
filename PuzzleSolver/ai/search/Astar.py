@@ -69,7 +69,7 @@ def search(cPuzzle):
                     elif generatedNode in cPuzzle.getChildNodes(parentNode[-1]):
                         parentNode.pop()
                     
-#                   print "FQ : PUT : "+ childnode.printNode()
+#                    print "FQ : PUT : "+ childnode.printNode()
 
         final = frontierQueue.getPath(cPuzzle.goalNode)
         if(final is not None):
