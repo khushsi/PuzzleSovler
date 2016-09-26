@@ -4,7 +4,7 @@ Assignment 1 : Foundation of AI - Uninformed and Informed Search
 
 ## Requirements
 
-Python 2.7.10
+Python 2.7.12
 
 ## Usage / Running the program - WaterJug, PathFinder and Pancake Problem
 
