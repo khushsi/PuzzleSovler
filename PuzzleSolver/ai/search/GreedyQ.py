@@ -69,7 +69,7 @@ def search(cPuzzle):
         if(final is not None):
             prev = None
             cost=0
-            for i in final[1]:
+            for i in final[1][1:]:
                 cost = cost + i.getCost(prev)
                 prev = i
             eval=final[1]

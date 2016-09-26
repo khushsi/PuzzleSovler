@@ -69,13 +69,13 @@ def search(cPuzzle):
                     elif generatedNode in cPuzzle.getChildNodes(parentNode[-1]):
                         parentNode.pop()
                     
-#                   print "FQ : PUT : "+ childnode.printNode()
+#                    print "FQ : PUT : "+ childnode.printNode()
 
         final = frontierQueue.getPath(cPuzzle.goalNode)
         if(final is not None):
             prev = None
             cost=0
-            for i in final[1]:
+            for i in final[1][1:]:
                 cost = cost + i.getCost(prev)
                 prev = i
             eval=final[1]

@@ -81,7 +81,6 @@ def IDAstar(startnode,heuristicfn,cutoff,cPuzzle):
                 totalnumberofnodesgenerated = totalnumberofnodesgenerated + 1
                 
                 if generatedNode.isgoalState():
-                        cost = nodegen[0]
                         newlist = copy.copy(nodegen[1])
                         return newlist,maxfrontiersize,0,totalnumberofnodesgenerated,cost,nextcutoff
                         
