@@ -4,9 +4,11 @@ Assignment 1 : Foundation of AI - Uninformed and Informed Search
 
 ## Requirements
 
-Python 2.7.10
+Python 2.7.12
 
 ## Usage / Running the program - WaterJug, PathFinder and Pancake Problem
+
+Main Folder of the project is PuzzleSolver and main file is PuzzleSolver.py
 
 Command : Python PuzzleSolver.py testcasefile algorithm heuristic
 
@@ -53,12 +55,26 @@ pancake flips dist-flips
 
 #Burnt Pancakes Sorting ::
 `https://en.wikipedia.org/wiki/Pancake_sorting`
+
 `Helmert, Malte. "Landmark heuristics for the pancake problem." Third Annual Symposium on Combinatorial Search. 2010.`
 
 #Discussions with other student
-#Program problematic parth
-Not able to run pancake test cases on bfs, dfs in 30 minutes
-
 ##Development Environment
 `Centos`
  
+## All typescripts - created using script command are in folder PuzzleSolver/typescriptfolder
+
+Individual Typescript can be find in `PuzzleSolver/typescriptfolder/`
+A consolidated Typescript is `PuzzleSolver/typescript.log`
+
+`Type script name convention`
+
+``` typescript.test_cities.config.bfs``` - for bfs on test_cities.config file
+``` typescript.test_cities.config.astar.dotproduct``` - for A* on test_cities.config file with heuristic dotproduct
+
+
+
+#Program problematic part
+pancake program runs only for n <8 in 30 minutes of time. so not able to run pancake test cases on bfs, dfs in 30 minutes
+I have added one pancakes.config as an alternative test case if it is acceptable or to show that the program is not faulty
+
