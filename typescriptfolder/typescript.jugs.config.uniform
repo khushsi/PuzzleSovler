@@ -1,0 +1,14 @@
+Script started on Mon 26 Sep 2016 09:58:23 PM EDT
+(0, 0)
+(3, 0)
+(0, 3)
+(3, 3)
+(2, 4)
+(2, 0)
+(0, 2)
+Time Complexity:13
+Space Complexity Queue:3
+Space Complexity VisitedList:0
+PathCost:7
+
+Script done on Mon 26 Sep 2016 09:58:23 PM EDT

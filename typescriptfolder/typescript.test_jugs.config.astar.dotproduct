@@ -1,0 +1,125 @@
+Script started on Mon 26 Sep 2016 09:58:24 PM EDT
+selected tuple
+<ai.puzzle.JugPuzzle.Node object at 0x7fdb0e5718d0>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.JugPuzzle.Node object at 0x7fdb0e571b50>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.JugPuzzle.Node object at 0x7fdb0e571c50>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.JugPuzzle.Node object at 0x7fdb0e571c10>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.JugPuzzle.Node object at 0x7fdb0e571bd0>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.JugPuzzle.Node object at 0x7fdb0e571cd0>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.JugPuzzle.Node object at 0x7fdb0e571d10>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.JugPuzzle.Node object at 0x7fdb0e571d50>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.JugPuzzle.Node object at 0x7fdb0e571b90>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.JugPuzzle.Node object at 0x7fdb0e571c90>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.JugPuzzle.Node object at 0x7fdb0e571d90>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.JugPuzzle.Node object at 0x7fdb0e571e50>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.JugPuzzle.Node object at 0x7fdb0e571ed0>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.JugPuzzle.Node object at 0x7fdb0e571890>
+selected tuple
+selected tuple
+<ai.puzzle.JugPuzzle.Node object at 0x7fdb0e571e10>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.JugPuzzle.Node object at 0x7fdb0e571dd0>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+ i came here kya
+(0, 0)
+(3, 0)
+(0, 3)
+(3, 3)
+(1, 5)
+(1, 0)
+(0, 1)
+(3, 1)
+(0, 4)
+Time Complexity:15
+Space Complexity Queue:3
+Space Complexity VisitedList:0
+PathCost:8
+
+Script done on Mon 26 Sep 2016 09:58:24 PM EDT

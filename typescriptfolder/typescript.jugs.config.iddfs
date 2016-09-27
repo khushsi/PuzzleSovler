@@ -1,0 +1,20 @@
+Script started on Mon 26 Sep 2016 09:58:23 PM EDT
+(0, 0)
+(3, 0)
+(0, 4)
+(3, 4)
+(0, 3)
+(3, 1)
+(3, 3)
+(0, 1)
+(2, 4)
+(1, 0)
+(2, 0)
+(1, 4)
+(0, 2)
+Time Complexity:52
+Space Complexity Queue:3
+Space Complexity VisitedList:12
+Depth Iterated : 7
+
+Script done on Mon 26 Sep 2016 09:58:23 PM EDT

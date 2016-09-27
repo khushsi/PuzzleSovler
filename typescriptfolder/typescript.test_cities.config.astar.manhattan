@@ -1,0 +1,183 @@
+Script started on Mon 26 Sep 2016 09:58:24 PM EDT
+selected tuple
+<ai.puzzle.LocationNode.LocationNode object at 0x7f887681e8d0>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.LocationNode.LocationNode object at 0x7f887681ea50>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.LocationNode.LocationNode object at 0x7f887681e950>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.LocationNode.LocationNode object at 0x7f887681e910>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.LocationNode.LocationNode object at 0x7f887681eb50>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.LocationNode.LocationNode object at 0x7f887681ea10>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.LocationNode.LocationNode object at 0x7f887681ead0>
+selected tuple
+selected tuple
+<ai.puzzle.LocationNode.LocationNode object at 0x7f887681ea90>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.LocationNode.LocationNode object at 0x7f887681e990>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.LocationNode.LocationNode object at 0x7f887681eb90>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.LocationNode.LocationNode object at 0x7f887681ec90>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.LocationNode.LocationNode object at 0x7f887681edd0>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.LocationNode.LocationNode object at 0x7f887681ecd0>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.LocationNode.LocationNode object at 0x7f887681ebd0>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.LocationNode.LocationNode object at 0x7f887681ee10>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.LocationNode.LocationNode object at 0x7f887681ed10>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.LocationNode.LocationNode object at 0x7f887681ec10>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.LocationNode.LocationNode object at 0x7f887681eb10>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.LocationNode.LocationNode object at 0x7f887681ee50>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.LocationNode.LocationNode object at 0x7f887681ed50>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.LocationNode.LocationNode object at 0x7f887681e9d0>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.LocationNode.LocationNode object at 0x7f887681ec50>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.LocationNode.LocationNode object at 0x7f887681ee90>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.LocationNode.LocationNode object at 0x7f887681ed90>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+selected tuple
+<ai.puzzle.LocationNode.LocationNode object at 0x7f887681eed0>
+selected tuple
+start adding new nodes
+added new nodes
+append to parent node
+append to parent node finish
+ i came here kya
+C00
+C11
+C02
+C13
+Time Complexity:24
+Space Complexity Queue:8
+Space Complexity VisitedList:0
+PathCost:9
+
+Script done on Mon 26 Sep 2016 09:58:24 PM EDT
