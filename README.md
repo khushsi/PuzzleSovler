@@ -41,7 +41,7 @@ gcdjug
 ```
 `hueuristic only for pancake puzzle`
 ```
-pancake flips dist-flips
+pancake flips dist-flips pancakes
 ```
 
 ## Python version
@@ -58,13 +58,12 @@ pancake flips dist-flips
 
 `Helmert, Malte. "Landmark heuristics for the pancake problem." Third Annual Symposium on Combinatorial Search. 2010.`
 
-#Discussions with other student
 #Program problematic part
 Not able to run pancake test cases on bfs, dfs in 30 minutes
 ##Development Environment
 `Centos`
  
-## All typescripts - created using script command are in folder PuzzleSolver/typescriptfolder
+## All typescripts - created using script command are in folder `typescriptfolder`
 
 `Type script name convention`
 
