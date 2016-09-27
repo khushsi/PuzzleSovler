@@ -65,7 +65,10 @@ pancake flips dist-flips
 ## All typescripts - created using script command are in folder PuzzleSolver/typescriptfolder
 
 Individual Typescript can be find in `PuzzleSolver/typescriptfolder/`
-A consolidated Typescript is `PuzzleSolver/typescript.log`
+A consolidated Typescript is 
+`PuzzleSolver/typescript.log.jugs`
+`PuzzleSolver/typescript.log.cities`
+`PuzzleSolver/typescript.log.pancakes`
 
 `Type script name convention`
 
